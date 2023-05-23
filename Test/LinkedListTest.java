@@ -1,10 +1,10 @@
-package MyLinkedList;
-
+import MyLinkedList.LinkedList;
+import MyLinkedList.MyList;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class LinkedListImplTest {
+public class LinkedListTest {
 
     @Test
     public void testFlujoCompleto() {
