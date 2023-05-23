@@ -1,7 +1,9 @@
 package BinaryTree.BinaryTree;
-
-import MyList.MyList;
+import MyLinkedList.MyList;
+import MyLinkedList.LinkedList;
 import org.junit.Test;
+
+import java.util.Optional;
 
 import static org.junit.Assert.*;
 
@@ -23,7 +25,7 @@ public class BinaryTreeLinkedListTest {
         assertEquals("A",binaryTreeList.find(8));
         assertEquals("B",binaryTreeList.find(15));
 
-        MyList list = binaryTreeList.inOrder();
+        LinkedList list = binaryTreeList.inOrder();
 
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i));
@@ -47,14 +49,14 @@ public class BinaryTreeLinkedListTest {
         oTree.insert(4, 4);
         oTree.insert(18, 18);
 
-        MyList<Integer> colValues = oTree.inOrder();
+        LinkedList colValues = oTree.inOrder();
 
-        assertEquals(new Integer(-1), colValues.get(0));
-        assertEquals(new Integer(3), colValues.get(1));
-        assertEquals(new Integer(4), colValues.get(2));
-        assertEquals(new Integer(11), colValues.get(3));
-        assertEquals(new Integer(18), colValues.get(4));
-        assertEquals(new Integer(21), colValues.get(5));
+        assertEquals(-1, colValues.get(0));
+        assertEquals(3, colValues.get(1));
+        assertEquals(4, colValues.get(2));
+        assertEquals(11, colValues.get(3));
+        assertEquals(18, colValues.get(4));
+        assertEquals(21, colValues.get(5));
     }
 
     @Test
@@ -72,11 +74,11 @@ public class BinaryTreeLinkedListTest {
         oTree.delete(-1);
         oTree.delete(18);
 
-        MyList<Integer> colValues = oTree.inOrder();
+        LinkedList colValues = oTree.inOrder();
 
-        assertEquals(new Integer(4), colValues.get(0));
-        assertEquals(new Integer(11), colValues.get(1));
-        assertEquals(new Integer(21), colValues.get(2));
+        assertEquals(4, colValues.get(0));
+        assertEquals(11, colValues.get(1));
+        assertEquals(21, colValues.get(2));
     }
 
     @Test
@@ -93,7 +95,7 @@ public class BinaryTreeLinkedListTest {
         oTree.delete(18);
         oTree.delete(4);
 
-        MyList<Integer> colValues = oTree.inOrder();
+        LinkedList colValues = oTree.inOrder();
 
         assertEquals(0, colValues.size());
     }
@@ -119,7 +121,7 @@ public class BinaryTreeLinkedListTest {
 
         oTemp = oTree.find(21);
 
-        assertEquals(new Integer(21), oTemp);
+        assertEquals(21, oTemp.intValue());
 
     }
 
@@ -172,7 +174,7 @@ public class BinaryTreeLinkedListTest {
 
 
         System.out.println("Árbol en inOrder:");
-        MyList list = binaryTreeList.inOrder();
+        LinkedList list = binaryTreeList.inOrder();
 
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i));
@@ -182,7 +184,7 @@ public class BinaryTreeLinkedListTest {
         int elementToRemove = 11;
         binaryTreeList.delete(elementToRemove);
         System.out.println("\nÁrbol después de eliminar el elemento " + elementToRemove + ":");
-        MyList list2 = binaryTreeList.inOrder();
+        LinkedList list2 = binaryTreeList.inOrder();
 
         for (int i = 0; i < list2.size(); i++) {
             System.out.println(list2.get(i));

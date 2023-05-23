@@ -1,6 +1,6 @@
 package BinaryTree.BinaryTree;
 
-import MyList.MyList;
+import MyLinkedList.LinkedList;
 
 
 public interface MyTree <K extends Comparable<K>,T>{
@@ -8,6 +8,6 @@ public interface MyTree <K extends Comparable<K>,T>{
     void insert (K key, T data);
     void delete (K key);
     int size ();
-    MyList<K> inOrder();
+    LinkedList inOrder();
     boolean contains(K key);
 }
