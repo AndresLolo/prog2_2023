@@ -8,4 +8,5 @@ public interface MyList<T> {
     void addFirst(T value);
     void addLast(T value);
     int size();
+    T set(int position, T value);
 }

@@ -77,6 +77,21 @@ public class LinkedList<T> implements MyList<T>{
     }
 
     @Override
+    public T set(int position, T value) {
+        int i = 0;
+        Nodo<T> temp = this.first;
+        while(i < position){
+            temp = temp.getNext();
+            if (temp == null){
+                return null;
+            }
+            i++;
+        }
+        temp.setValue(value);
+        return temp.getValue();
+    }
+
+    @Override
     public void remove(int position) {
         int i = 0;
         Nodo<T> temp = this.first;
