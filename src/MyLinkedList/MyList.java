@@ -1,11 +1,11 @@
 package MyLinkedList;
 
-public interface MyList {
-    void add(Object value);
+public interface MyList<T> {
+    void add(T value);
     void remove(int position);
-    Object get(int position);
-    boolean contains(Object nodo);
-    void addFirst(Object value);
-    void addLast(Object value);
+    T get(int position);
+    boolean contains(T nodo);
+    void addFirst(T value);
+    void addLast(T value);
     int size();
 }

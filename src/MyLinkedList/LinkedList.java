@@ -1,28 +1,28 @@
 package MyLinkedList;
 
-public class LinkedList implements MyList{
-    private Nodo first;
+public class LinkedList<T> implements MyList<T>{
+    private Nodo<T> first;
     @Override
-    public void add(Object value) {
+    public void add(T value) {
         if (this.first == null){
-            this.first = new Nodo(value);
+            this.first = new Nodo<>(value);
         }else{
-            Nodo temp = this.first;
+            Nodo<T> temp = this.first;
             while(temp.getNext()!= null){
 
                 temp = temp.getNext();
 
             }
-            Nodo newNode = new Nodo(value);
+            Nodo<T> newNode = new Nodo<>(value);
             temp.setNext(newNode);
 
         }
     }
 
     @Override
-    public Object get(int position) {
+    public T get(int position) {
         int i = 0;
-        Nodo temp = this.first;
+        Nodo<T> temp = this.first;
         while(i < position){
             temp = temp.getNext();
             if (temp == null){
@@ -34,8 +34,8 @@ public class LinkedList implements MyList{
     }
 
     @Override
-    public boolean contains(Object nodo) {
-        Nodo temp = this.first;
+    public boolean contains(T nodo) {
+        Nodo<T> temp = this.first;
         int i = 0;
         while(temp.getNext() != null){
             if(nodo != get(i)){
@@ -49,21 +49,21 @@ public class LinkedList implements MyList{
     }
 
     @Override
-    public void addFirst(Object value) {
-        Nodo temp = this.first;
-        this.first = new Nodo(value);
+    public void addFirst(T value) {
+        Nodo<T> temp = this.first;
+        this.first = new Nodo<>(value);
         this.first.setNext(temp);
     }
 
 
     @Override
-    public void addLast(Object value) {
+    public void addLast(T value) {
         add(value);
     }
 
     @Override
     public int size() {
-        Nodo temp = this.first;
+        Nodo<T> temp = this.first;
         int tamaño = 1;
         if (temp == null){
             return 0;
@@ -79,7 +79,7 @@ public class LinkedList implements MyList{
     @Override
     public void remove(int position) {
         int i = 0;
-        Nodo temp = this.first;
+        Nodo<T> temp = this.first;
         if (get(position) != null) {
             if (position != 0) {
                 while (i < position - 1) {

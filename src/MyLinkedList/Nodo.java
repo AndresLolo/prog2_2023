@@ -1,27 +1,27 @@
 package MyLinkedList;
 
-public class Nodo {
-    private Object value;
-    private Nodo next;
+public class Nodo<T> {
+    private T value;
+    private Nodo<T> next;
 
-    public Nodo(Object value){
+    public Nodo(T value){
         this.value = value;
         this.next = null;
     }
 
-    public Object getValue() {
+    public T getValue() {
         return value;
     }
 
-    public void setValue(Object value) {
+    public void setValue(T value) {
         this.value = value;
     }
 
-    public Nodo getNext() {
+    public Nodo<T> getNext() {
         return next;
     }
 
-    public void setNext(Nodo next) {
+    public void setNext(Nodo<T> next) {
         this.next = next;
     }
 }

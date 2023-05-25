@@ -139,7 +139,7 @@ public class Tree<K extends Comparable<K>,T> implements MyTree<K,T> {
     //funcion que realice el recorrido del arbol en orden (izquierda, raiz, derecha)
     @Override
     public LinkedList inOrder() {
-        LinkedList list = new LinkedList();
+        LinkedList<K> list = new LinkedList<>();
         Node<K,T> currentNode = this.root;
         while (currentNode != null){
             if (currentNode.leftChild == null){
