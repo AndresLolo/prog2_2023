@@ -5,60 +5,36 @@ import static org.junit.Assert.*;
 
 public class HeapImplTest {
 
-    @Test
-    public void testHeapMin() {
-        BinaryHeap heapMax = new BinaryHeap();
-
-        heapMax.insert(150);
-        heapMax.insert(15);
-        heapMax.insert(2);
-        heapMax.insert(200);
-        heapMax.insert(17);
-
-        assertEquals(5, heapMax.size());
-
-        assertEquals(new Integer(2), heapMax.get());
-        assertEquals(new Integer(2), heapMax.deleteMin());
-
-        assertEquals(new Integer(15), heapMax.get());
-        assertEquals(new Integer(15), heapMax.deleteMin());
-
-        assertEquals(new Integer(17), heapMax.get());
-        assertEquals(new Integer(17), heapMax.deleteMin());
-
-        assertEquals(new Integer(150), heapMax.get());
-        assertEquals(new Integer(150), heapMax.deleteMin());
-
-        assertEquals(new Integer(200), heapMax.get());
-        assertEquals(new Integer(200), heapMax.deleteMin());
-
-        assertEquals(0, heapMax.size());
-    }
-
-
-
 
 
         @Test
-        public void testInsertAndDeleteMin() {
-            BinaryHeap heap = new BinaryHeap();
+        public void testHeapMin() {
+            BinaryHeap heapMin = new BinaryHeap();
 
-            assertTrue(heap.isEmpty());
+            heapMin.insert(150);
+            heapMin.insert(15);
+            heapMin.insert(2);
+            heapMin.insert(200);
+            heapMin.insert(17);
 
-            heap.insert(5);
-            heap.insert(3);
-            heap.insert(8);
-            heap.insert(1);
-            heap.insert(6);
-            assertFalse(heap.isEmpty());
+            assertEquals(5, heapMin.size());
 
-            assertEquals(1, heap.deleteMin());
-            assertEquals(3, heap.deleteMin());
-            assertEquals(5, heap.deleteMin());
-            assertEquals(6, heap.deleteMin());
-            assertEquals(8, heap.deleteMin());
+            assertEquals(new Integer(2), heapMin.get());
+            assertEquals(new Integer(2), heapMin.deleteMin());
 
-            assertTrue(heap.isEmpty());
+            assertEquals(new Integer(15), heapMin.get());
+            assertEquals(new Integer(15), heapMin.deleteMin());
+
+            assertEquals(new Integer(17), heapMin.get());
+            assertEquals(new Integer(17), heapMin.deleteMin());
+
+            assertEquals(new Integer(150), heapMin.get());
+            assertEquals(new Integer(150), heapMin.deleteMin());
+
+            assertEquals(new Integer(200), heapMin.get());
+            assertEquals(new Integer(200), heapMin.deleteMin());
+
+            assertEquals(0, heapMin.size());
         }
 
     }

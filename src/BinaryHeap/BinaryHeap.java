@@ -1,14 +1,15 @@
 package BinaryHeap;
 
-import MyLinkedList.LinkedList;
-import MyLinkedList.MyList;
 
-public class BinaryHeap<T extends Comparable<T>> implements MyHeap<T>{
-    private MyList<T> heap;
+
+public class BinaryHeap<T extends Comparable<T>> implements MyHeap<T> {
+    private T[] heap;
     private int size;
+    private static final int CAPACITY = 2;
 
     public BinaryHeap() {
-        heap = new LinkedList<>();
+
+        heap = (T[]) new Comparable[CAPACITY];
         size = 0;
     }
 
@@ -16,22 +17,23 @@ public class BinaryHeap<T extends Comparable<T>> implements MyHeap<T>{
         return size == 0;
     }
 
-    @Override
     public void insert(T value) {
-        heap.add(value);
+        if (size == heap.length-1) {
+            doubleSize();
+        }
+
+        heap[size] = value;
         size++;
         heapifyUp(size - 1);
     }
-    @Override
+
     public T deleteMin() {
         if (isEmpty()) {
             throw new IllegalStateException("Heap is empty");
         }
 
-        T min = heap.get(0);
-        T lastElement = heap.get(size - 1);
-        heap.set(0, lastElement);
-        heap.remove(size - 1);
+        T min = (T) heap[0];
+        heap[0] = heap[size - 1];
         size--;
         heapifyDown(0);
 
@@ -49,15 +51,12 @@ public class BinaryHeap<T extends Comparable<T>> implements MyHeap<T>{
             throw new IllegalStateException("Heap is empty");
         }
 
-        return heap.get(0);
+        return (T) heap[0];
     }
-    //funcion que elimina el maximo
-
-
 
     private void heapifyUp(int index) {
         int parent = (index - 1) / 2;
-        while (index > 0 && heap.get(index).compareTo(heap.get(parent)) < 0) {
+        while (index > 0 && ((T) heap[index]).compareTo((T) heap[parent]) < 0) {
             swap(index, parent);
             index = parent;
             parent = (index - 1) / 2;
@@ -69,11 +68,11 @@ public class BinaryHeap<T extends Comparable<T>> implements MyHeap<T>{
         int right = 2 * index + 2;
         int smallest = index;
 
-        if (left < size && heap.get(left).compareTo(heap.get(smallest)) < 0) {
+        if (left < size && ((T) heap[left]).compareTo((T) heap[smallest]) < 0) {
             smallest = left;
         }
 
-        if (right < size && heap.get(right).compareTo(heap.get(smallest)) < 0) {
+        if (right < size && ((T) heap[right]).compareTo((T) heap[smallest]) < 0) {
             smallest = right;
         }
 
@@ -82,16 +81,16 @@ public class BinaryHeap<T extends Comparable<T>> implements MyHeap<T>{
             heapifyDown(smallest);
         }
     }
-
-    private void swap(int i, int j) {
-        T temp = heap.get(i);
-        heap.set(i, heap.get(j));
-        heap.set(j, temp);
+    private void doubleSize() {
+        T[] old = heap;
+        heap = (T[]) new Comparable[heap.length * 2];
+        System.arraycopy(old, 0, heap, 0, size);
     }
 
-
-
-
+    private void swap(int i, int j) {
+        Object temp = heap[i];
+        heap[i] = heap[j];
+        heap[j] = (T) temp;
+    }
 
 }
-
