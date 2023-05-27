@@ -7,6 +7,7 @@ public class BinaryHeap<T extends Comparable<T>> implements MyHeap<T> {
     private int size;
     private static final int CAPACITY = 2;
 
+
     public BinaryHeap() {
 
         heap = (T[]) new Comparable[CAPACITY];
@@ -92,5 +93,6 @@ public class BinaryHeap<T extends Comparable<T>> implements MyHeap<T> {
         heap[i] = heap[j];
         heap[j] = (T) temp;
     }
+
 
 }
