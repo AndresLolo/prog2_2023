@@ -1,6 +1,10 @@
 package MyLinkedList;
 
-public class LinkedList<T> implements MyList<T>{
+import queue.MyQueue;
+import queue.QueueVacia;
+import stack.MyStack;
+
+public class LinkedList<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
     private Nodo<T> first;
     @Override
     public void add(T value) {
@@ -34,6 +38,21 @@ public class LinkedList<T> implements MyList<T>{
     }
 
     @Override
+    public void enqueue(T value) {
+        addFirst(value);
+    }
+
+    @Override
+    public T dequeue() throws QueueVacia {
+        if (this.size() == 0){
+            throw new QueueVacia();
+        }
+        T temp = get(size());
+        remove(this.size());
+        return temp;
+    }
+
+    @Override
     public boolean contains(T nodo) {
         Nodo<T> temp = this.first;
         int i = 0;
@@ -59,6 +78,21 @@ public class LinkedList<T> implements MyList<T>{
     @Override
     public void addLast(T value) {
         add(value);
+    }
+
+    @Override
+    public void push(T value) {
+        addLast(value);
+    }
+
+    @Override
+    public T pop() throws QueueVacia {
+        return dequeue();
+    }
+
+    @Override
+    public T peek() {
+        return get(size());
     }
 
     @Override
