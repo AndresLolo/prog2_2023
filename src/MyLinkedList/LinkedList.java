@@ -166,46 +166,4 @@ public class LinkedList<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
         this.last = null;
     }
 
-    public static void main(String[] args) {
-        LinkedList miLista = new LinkedList();
-        /*miLista.add(1);
-        miLista.add(2);
-        miLista.add(3);
-        miLista.add(4);
-        miLista.add(5);
-        miLista.add(6);
-        miLista.add(7);
-        miLista.add(8);
-        miLista.add(10);
-        miLista.add(11);
-        miLista.add(12);
-        miLista.add(13);
-        miLista.add(14);
-        miLista.add(15);
-        miLista.add(16);
-        System.out.println(miLista.get(13));
-        miLista.remove(13);
-        int i= 0;
-        while(i < miLista.size()){
-            System.out.println(miLista.get(i));
-            i++;
-        }
-        miLista.add(22);
-        System.out.println(miLista.get(14));
-        miLista.contains(7);
-        miLista.addFirst(32);
-        System.out.println(miLista.get(0));
-        System.out.println(miLista.get(1));
-        miLista.remove(16);
-        System.out.println(miLista.get(15));*/
-        miLista.enqueue(1);
-        System.out.println(miLista.get(0));
-        miLista.enqueue(2);
-        miLista.dequeue();
-        System.out.println(miLista.get(1));
-        System.out.println(miLista.size());
-        System.out.println(miLista.contains(2));
-
-
-    }
 }
