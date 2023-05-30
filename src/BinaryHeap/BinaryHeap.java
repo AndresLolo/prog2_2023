@@ -12,6 +12,7 @@ public class BinaryHeap<T extends Comparable<T>> implements MyHeap<T> {
 
         heap = (T[]) new Comparable[CAPACITY];
         size = 0;
+
     }
 
     public boolean isEmpty() {
