@@ -6,10 +6,12 @@ import stack.MyStack;
 
 public class LinkedList<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
     private Nodo<T> first;
+    private Nodo<T> last;
     @Override
     public void add(T value) {
         if (this.first == null){
             this.first = new Nodo<>(value);
+            this.last = this.first;
         }else{
             Nodo<T> temp = this.first;
             while(temp.getNext()!= null){
@@ -19,6 +21,7 @@ public class LinkedList<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
             }
             Nodo<T> newNode = new Nodo<>(value);
             temp.setNext(newNode);
+            this.last = newNode;
 
         }
     }
@@ -43,20 +46,17 @@ public class LinkedList<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
     }
 
     @Override
-    public T dequeue() throws QueueVacia {
-        if (this.size() == 0){
-            throw new QueueVacia();
-        }
-        T temp = get(size());
-        remove(this.size());
-        return temp;
+    public T dequeue(){
+        T borrador = this.last.getValue();
+        remove(size()-1);
+        return borrador;
     }
 
     @Override
     public boolean contains(T nodo) {
         Nodo<T> temp = this.first;
         int i = 0;
-        while(temp.getNext() != null){
+        while(temp != null){
             if(nodo != get(i)){
                 temp = temp.getNext();
                 i++;
@@ -70,8 +70,17 @@ public class LinkedList<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
     @Override
     public void addFirst(T value) {
         Nodo<T> temp = this.first;
-        this.first = new Nodo<>(value);
-        this.first.setNext(temp);
+        Nodo<T> nuevo = new Nodo<>(value);
+        if (this.first == null){
+            this.first = nuevo;
+            this.last = nuevo;
+        }else {
+
+            nuevo.setNext(this.first);
+            this.first = nuevo;
+        }
+
+        this.first.setNext(temp);;
     }
 
 
@@ -86,13 +95,13 @@ public class LinkedList<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
     }
 
     @Override
-    public T pop() throws QueueVacia {
+    public T pop() {
         return dequeue();
     }
 
     @Override
     public T peek() {
-        return get(size());
+        return get(size()-1);
     }
 
     @Override
@@ -139,6 +148,7 @@ public class LinkedList<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
                     temp.setNext(temp.getNext().getNext());
                 } else {
                     temp.setNext(null);
+                    this.last = temp;
                 }
             } else {
 
@@ -151,12 +161,14 @@ public class LinkedList<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
     }
 
     public LinkedList(){
+
         this.first = null;
+        this.last = null;
     }
 
     public static void main(String[] args) {
         LinkedList miLista = new LinkedList();
-        miLista.add(1);
+        /*miLista.add(1);
         miLista.add(2);
         miLista.add(3);
         miLista.add(4);
@@ -185,7 +197,15 @@ public class LinkedList<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
         System.out.println(miLista.get(0));
         System.out.println(miLista.get(1));
         miLista.remove(16);
-        System.out.println(miLista.get(15));
+        System.out.println(miLista.get(15));*/
+        miLista.enqueue(1);
+        System.out.println(miLista.get(0));
+        miLista.enqueue(2);
+        miLista.dequeue();
+        System.out.println(miLista.get(1));
+        System.out.println(miLista.size());
+        System.out.println(miLista.contains(2));
+
 
     }
 }

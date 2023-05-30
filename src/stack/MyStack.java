@@ -5,7 +5,7 @@ import queue.QueueVacia;
 public interface MyStack<T> {
     void push(T value);
 
-    T pop() throws QueueVacia;
+    T pop();
 
     T peek();
 
