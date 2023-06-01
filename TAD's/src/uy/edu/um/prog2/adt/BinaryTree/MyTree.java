@@ -1,6 +1,6 @@
-package BinaryTree.BinaryTree;
+package uy.edu.um.prog2.adt.BinaryTree;
 
-import MyLinkedList.LinkedList;
+import uy.edu.um.prog2.adt.MyLinkedList.LinkedList;
 
 
 public interface MyTree <K extends Comparable<K>,T>{

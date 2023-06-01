@@ -1,7 +1,6 @@
-import BinaryHeap.BinaryHeap;
-import MyLinkedList.MyList;
 import org.junit.Test;
-import Hash.*;
+import uy.edu.um.prog2.adt.Hash.*;
+import uy.edu.um.prog2.adt.Hash.HashImpl;
 
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertTrue;

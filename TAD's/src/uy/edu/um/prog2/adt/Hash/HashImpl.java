@@ -1,6 +1,4 @@
-package Hash;
-
-import BinaryTree.BinaryTree.MyTree;
+package uy.edu.um.prog2.adt.Hash;
 
 import java.util.Arrays;
 

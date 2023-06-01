@@ -1,5 +1,5 @@
-import MyLinkedList.LinkedList;
-import MyLinkedList.MyList;
+import uy.edu.um.prog2.adt.MyLinkedList.LinkedList;
+import uy.edu.um.prog2.adt.MyLinkedList.MyList;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

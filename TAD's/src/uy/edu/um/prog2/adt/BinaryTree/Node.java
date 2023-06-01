@@ -1,4 +1,4 @@
-package BinaryTree.BinaryTree;
+package uy.edu.um.prog2.adt.BinaryTree;
 
 public class Node <K extends Comparable<K>, T> {
     K key;

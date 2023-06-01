@@ -1,4 +1,4 @@
-package MyLinkedList;
+package uy.edu.um.prog2.adt.MyLinkedList;
 
 public class Nodo<T> {
     private T value;

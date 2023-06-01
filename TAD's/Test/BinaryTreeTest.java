@@ -1,5 +1,5 @@
-import BinaryTree.BinaryTree.Tree;
-import MyLinkedList.LinkedList;
+import uy.edu.um.prog2.adt.BinaryTree.Tree;
+import uy.edu.um.prog2.adt.MyLinkedList.LinkedList;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

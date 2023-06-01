@@ -1,9 +1,9 @@
-import BinaryHeap.BinaryHeap;
+import uy.edu.um.prog2.adt.BinaryHeap.BinaryHeap;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class HeapImplTest {
+public class HeapTest {
 
 
 

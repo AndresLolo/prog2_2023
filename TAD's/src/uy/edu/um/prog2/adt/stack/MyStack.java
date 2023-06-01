@@ -1,6 +1,4 @@
-package stack;
-
-import queue.QueueVacia;
+package uy.edu.um.prog2.adt.stack;
 
 public interface MyStack<T> {
     void push(T value);

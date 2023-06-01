@@ -1,4 +1,4 @@
-package Hash;
+package uy.edu.um.prog2.adt.Hash;
 
 public class Node<K, T> {
     K key;

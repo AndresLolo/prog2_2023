@@ -1,8 +1,7 @@
-package MyLinkedList;
+package uy.edu.um.prog2.adt.MyLinkedList;
 
-import queue.MyQueue;
-import queue.QueueVacia;
-import stack.MyStack;
+import uy.edu.um.prog2.adt.queue.MyQueue;
+import uy.edu.um.prog2.adt.stack.MyStack;
 
 public class LinkedList<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
     private Nodo<T> first;

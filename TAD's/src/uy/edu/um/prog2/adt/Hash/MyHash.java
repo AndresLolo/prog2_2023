@@ -1,4 +1,4 @@
-package Hash;
+package uy.edu.um.prog2.adt.Hash;
 
 public interface MyHash<K,V> {
     public void put(K key, V value);

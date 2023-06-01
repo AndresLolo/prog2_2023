@@ -1,10 +1,9 @@
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-import MyLinkedList.LinkedList;
-import stack.MyStack;
+import uy.edu.um.prog2.adt.MyLinkedList.LinkedList;
 
-public class StackImplTest {
+public class StackTest {
 
     @Test
     public void testFlujoCompleto() {

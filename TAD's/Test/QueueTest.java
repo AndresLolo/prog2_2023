@@ -1,10 +1,9 @@
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-import MyLinkedList.LinkedList;
-import queue.MyQueue;
+import uy.edu.um.prog2.adt.MyLinkedList.LinkedList;
 
-public class QueueImplTest {
+public class QueueTest {
 
     @Test
     public void testFlujoCompleto() {
