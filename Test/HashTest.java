@@ -9,24 +9,28 @@ import static org.junit.Assert.assertTrue;
 public class HashTest {
     @Test
     public void testFlujoNormal() {
-        HashImpl hash = new HashImpl(7);
+        HashImpl hash = new HashImpl(2);
 
         hash.put(1, "Daniel");
-        hash.put(3, "Lola");
-        hash.put(4, "Toby");
-        hash.put(5, "Siny");
-
+        hash.put(3, "pedro");
+        hash.put(3, "Toby");
+        hash.put(2, "Lola");
+        hash.put(11, "Siny");
 
         assertEquals(4, hash.size());
 
         assertTrue(hash.contains(3));
-        assertEquals("Lola", hash.get(3));
+        assertEquals("Toby", hash.get(3));
         hash.remove(3);
 
         assertEquals(3, hash.size());
 
         assertFalse(hash.contains(3));
         assertNull(hash.get(3));
+
+
+
+
 
 
 
