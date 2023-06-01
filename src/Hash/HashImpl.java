@@ -154,29 +154,8 @@ public class HashImpl<K,T> implements MyHash<K,T> {
         }
     }
 
-    public Node getobj(K key){
-        int lugar = key.hashCode() % capacity;
-        int i = 1;
-        if(table[lugar] == null){
-            return null;
-        }
-        else
-        if(table[lugar].getKey().equals(key)){
-            return table[lugar];
-        }
-        else {
-            int newPosition = ((key.hashCode() + linearColision(i)) % capacity);
-            while (i <= capacity && table[newPosition] != null && !table[newPosition].isDeleted() && !table[newPosition].getKey().equals(key)) {
-                i++;
-                newPosition = ((key.hashCode() + linearColision(i)) % capacity);
-            }
-            if (table[newPosition] == null || table[newPosition].isDeleted()) {
-                return null;
-            }
 
-            return table[newPosition];
-        }
-    }
+
 }
 
 
