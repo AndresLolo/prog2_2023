@@ -10,24 +10,24 @@ public class StackTest {
 
         LinkedList<Integer> colStack = new LinkedList<>();
 
-        colStack.push(new Integer(2));
-        colStack.push(new Integer(4));
-        colStack.push(new Integer(7));
+        colStack.push(2);
+        colStack.push(4);
+        colStack.push(7);
 
         assertEquals(new Integer(7), colStack.peek());
 
 
-            assertEquals(new Integer(7), colStack.pop());
+        assertEquals(new Integer(7), colStack.pop());
 
         assertEquals(new Integer(4), colStack.peek());
 
 
 
-            assertEquals(new Integer(4), colStack.pop());
+        assertEquals(new Integer(4), colStack.pop());
 
 
 
-            assertEquals(new Integer(2), colStack.pop());
+        assertEquals(new Integer(2), colStack.pop());
 
 
 
