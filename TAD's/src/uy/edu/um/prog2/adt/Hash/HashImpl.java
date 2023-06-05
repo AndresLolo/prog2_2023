@@ -1,6 +1,6 @@
 package uy.edu.um.prog2.adt.Hash;
 
-import java.util.Arrays;
+
 
 public class HashImpl<K,T> implements MyHash<K,T> {
     private int capacity;
@@ -11,7 +11,14 @@ public class HashImpl<K,T> implements MyHash<K,T> {
     public HashImpl(int capacity) {
         this.capacity = capacity;
         this.table = new Node[capacity];
-        Arrays.fill(table, null);
+        arrayfill();
+    }
+    //llenar el array con nulls pero son usar la bilbioteca de java
+    private void arrayfill(){
+        for (int i = 0; i < capacity; i++) {
+            table[i] = null;
+        }
+
     }
 
     @Override
@@ -48,7 +55,7 @@ public class HashImpl<K,T> implements MyHash<K,T> {
         capacity *= 2;
         Node[] oldTable = table;
         table = new Node[capacity];
-        Arrays.fill(table, null);
+        arrayfill();
         for (int i = 0; i < oldTable.length; i++) {
             if (oldTable[i] != null) {
                 put((K) oldTable[i].getKey(), (T) oldTable[i].getValue());

@@ -28,11 +28,5 @@ public class HashTest {
         assertNull(hash.get(3));
 
 
-
-
-
-
-
-
     }
 }
