@@ -2,11 +2,12 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 import uy.edu.um.prog2.adt.MyLinkedList.LinkedList;
+import uy.edu.um.prog2.adt.queue.QueueVacia;
 
 public class StackTest {
 
     @Test
-    public void testFlujoCompleto() {
+    public void testFlujoCompleto() throws QueueVacia {
 
         LinkedList<Integer> colStack = new LinkedList<>();
 

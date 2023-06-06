@@ -4,7 +4,7 @@ public interface MyQueue<T> {
 
     void enqueue(T value);
 
-    T dequeue();
+    T dequeue() throws QueueVacia;
 
     boolean contains(T value);
 

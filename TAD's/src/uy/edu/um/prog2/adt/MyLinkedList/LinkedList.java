@@ -1,7 +1,8 @@
 package uy.edu.um.prog2.adt.MyLinkedList;
 
-import uy.edu.um.prog2.adt.queue.MyQueue;
-import uy.edu.um.prog2.adt.stack.MyStack;
+import uy.edu.um.prog2.adt.queue.*;
+import uy.edu.um.prog2.adt.stack.*;
+
 
 public class LinkedList<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
     private Nodo<T> first;
@@ -45,7 +46,10 @@ public class LinkedList<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
     }
 
     @Override
-    public T dequeue(){
+    public T dequeue() throws QueueVacia {
+        if (this.first == null){
+            throw new QueueVacia();
+        }
         T borrador = this.last.getValue();
         remove(size()-1);
         return borrador;
@@ -94,7 +98,8 @@ public class LinkedList<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
     }
 
     @Override
-    public T pop() {
+    public T pop() throws QueueVacia {
+
         return dequeue();
     }
 
