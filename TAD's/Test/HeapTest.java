@@ -64,7 +64,7 @@ public class HeapTest {
         assertEquals(2, heapMax.delete());
 
         assertEquals(0, heapMax.size());
-        System.out.println(heapMax.get());
+
 
 
     }
