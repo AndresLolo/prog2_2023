@@ -15,22 +15,46 @@ public class ProgMain {
 
                     switch (opcion) {
                         case 1:
-                            listarPilotosMencionadosEnMes(scanner);
+                            try{
+                                listarPilotosMencionadosEnMes(scanner);
+                            }catch (Exception e){
+                                System.out.println("Algun dato ingresado es incorrecto");
+                            }
                             break;
                         case 2:
-                            listarUsuariosConMasTweets(scanner);
+                            try {
+                                listarUsuariosConMasTweets(scanner);
+                            }catch (Exception e){
+                                System.out.println("Algun dato ingresado es incorrecto");
+                            }
                             break;
                         case 3:
-                            contarHashtagsDistintos(scanner);
+                            try{
+                                contarHashtagsDistintos(scanner);
+                            }catch(Exception e){
+                                System.out.println("Fecha inválida. Por favor, ingrese una fecha válida en el formato YYYY-MM-DD.");
+                            }
                             break;
                         case 4:
+                            try{
                             hashtagMasUsado(scanner);
+                            }catch (Exception e){
+                                System.out.println("Algun dato ingresado es incorrecto");
+                            }
                             break;
                         case 5:
+                            try{
                             listarCuentasConMasFavoritos(scanner);
+                            }catch (Exception e){
+                                System.out.println("Algun dato ingresado es incorrecto");
+                            }
                             break;
                         case 6:
+                            try{
                             contarTweetsConPalabra(scanner);
+                            }catch (Exception e){
+                                System.out.println("Algun dato ingresado es incorrecto");
+                            }
                             break;
                         case 7:
                             System.out.println("¡Hasta luego!");
