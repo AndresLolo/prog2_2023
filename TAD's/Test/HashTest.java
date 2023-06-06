@@ -27,6 +27,8 @@ public class HashTest {
         assertFalse(hash.contains(3));
         assertNull(hash.get(3));
 
+        assertTrue(hash.contains(11));
+        assertEquals("Siny", hash.get(11));
 
     }
 }

@@ -9,7 +9,7 @@ public class HeapTest {
 
         @Test
         public void testHeapMin() {
-            BinaryHeap heapMin = new BinaryHeap();
+            BinaryHeap heapMin = new BinaryHeap(true);
 
             heapMin.insert(150);
             heapMin.insert(15);
@@ -20,24 +20,57 @@ public class HeapTest {
             assertEquals(5, heapMin.size());
 
             assertEquals(2, heapMin.get());
-            assertEquals(2, heapMin.deleteMin());
+            assertEquals(2, heapMin.delete());
 
             assertEquals(15, heapMin.get());
-            assertEquals(15, heapMin.deleteMin());
+            assertEquals(15, heapMin.delete());
 
             assertEquals(17, heapMin.get());
-            assertEquals(17, heapMin.deleteMin());
+            assertEquals(17, heapMin.delete());
 
             assertEquals(150, heapMin.get());
-            assertEquals(150, heapMin.deleteMin());
+            assertEquals(150, heapMin.delete());
 
             assertEquals(200, heapMin.get());
-            assertEquals(200, heapMin.deleteMin());
+            assertEquals(200, heapMin.delete());
 
             assertEquals(0, heapMin.size());
         }
+    @Test
+    public void testHeapMax() {
+        BinaryHeap heapMax = new BinaryHeap(false);
+
+        heapMax.insert(150);
+        heapMax.insert(15);
+        heapMax.insert(2);
+        heapMax.insert(200);
+        heapMax.insert(17);
+
+        assertEquals(5, heapMax.size());
+
+        assertEquals(200, heapMax.get());
+        assertEquals(200, heapMax.delete());
+
+        assertEquals(150, heapMax.get());
+        assertEquals(150, heapMax.delete());
+
+        assertEquals(17, heapMax.get());
+        assertEquals(17, heapMax.delete());
+
+        assertEquals(15, heapMax.get());
+        assertEquals(15, heapMax.delete());
+
+        assertEquals(2, heapMax.get());
+        assertEquals(2, heapMax.delete());
+
+        assertEquals(0, heapMax.size());
+        System.out.println(heapMax.get());
+
 
     }
+
+
+}
 
 
 

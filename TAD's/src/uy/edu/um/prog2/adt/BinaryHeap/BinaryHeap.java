@@ -5,12 +5,14 @@ public class BinaryHeap<T extends Comparable<T>> implements MyHeap<T> {
     private T[] heap;
     private int size;
     private static final int CAPACITY = 2;
+    private boolean isHeapMin = true;
 
 
-    public BinaryHeap() {
+    public BinaryHeap(boolean isHeapMin) {
 
         heap = (T[]) new Comparable[CAPACITY];
         size = 0;
+        this.isHeapMin = isHeapMin;
 
     }
 
@@ -28,7 +30,7 @@ public class BinaryHeap<T extends Comparable<T>> implements MyHeap<T> {
         heapifyUp(size - 1);
     }
 
-    public T deleteMin() {
+    public T delete() {
         if (isEmpty()) {
             throw new IllegalStateException("Heap is empty");
         }
@@ -57,7 +59,7 @@ public class BinaryHeap<T extends Comparable<T>> implements MyHeap<T> {
 
     private void heapifyUp(int index) {
         int parent = (index - 1) / 2;
-        while (index > 0 && ((T) heap[index]).compareTo((T) heap[parent]) < 0) {
+        while (index > 0 && comparar((T) heap[index],(T) heap[parent]) < 0) {
             swap(index, parent);
             index = parent;
             parent = (index - 1) / 2;
@@ -69,11 +71,11 @@ public class BinaryHeap<T extends Comparable<T>> implements MyHeap<T> {
         int right = 2 * index + 2;
         int smallest = index;
 
-        if (left < size && ((T) heap[left]).compareTo((T) heap[smallest]) < 0) {
+        if (left < size && comparar((T)heap[left],(T) heap[smallest]) < 0) {
             smallest = left;
         }
 
-        if (right < size && ((T) heap[right]).compareTo((T) heap[smallest]) < 0) {
+        if (right < size &&  comparar((T)heap[right],(T) heap[smallest]) < 0) {
             smallest = right;
         }
 
@@ -92,6 +94,13 @@ public class BinaryHeap<T extends Comparable<T>> implements MyHeap<T> {
         Object temp = heap[i];
         heap[i] = heap[j];
         heap[j] = (T) temp;
+    }
+    private int comparar(T a, T b){
+        if(isHeapMin){
+            return a.compareTo(b);
+        }else{
+            return (a.compareTo(b))*(-1);
+        }
     }
 
 
