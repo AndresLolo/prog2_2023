@@ -7,7 +7,7 @@ import java.io.IOException;
 public class CVSreader {
 
         public static void main(String[] args) {
-            try (CSVParser parser = new CSVParser(new FileReader("/Users/alolo/Library/CloudStorage/OneDrive-UniversidaddeMontevideo/obligatorio2023/f1_dataset_test.csv"), CSVFormat.DEFAULT)) {
+            try (CSVParser parser = new CSVParser(new FileReader("Obliogatorio/src/f1_dataset_test.csv"), CSVFormat.DEFAULT)) {
                 for (CSVRecord record : parser) {
                     String col1 = record.get(0);
                     String col2 = record.get(1);
