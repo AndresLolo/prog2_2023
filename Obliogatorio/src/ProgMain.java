@@ -1,4 +1,7 @@
 import org.apache.commons.csv.CSVParser;
+import uy.edu.um.prog2.adt.MyLinkedList.*;
+
+import uy.edu.um.prog2.adt.Hash.*;
 
 import java.util.Scanner;
 import java.time.LocalDate;
@@ -102,6 +105,12 @@ public class ProgMain {
 
             int anio = Integer.parseInt(anioInput);
             int mes = Integer.parseInt(mesInput);
+            LinkedList list = CVSreader.PilotosMencionados(anioInput,mesInput);
+            for (int i = 0; i < 10; i++) {
+                System.out.println(list.get(i));
+
+            }
+
 
             // Lógica para listar pilotos mencionados en un mes y año específicos
             System.out.println("Opción 1 seleccionada. Año: " + anio + ", Mes: " + mes);

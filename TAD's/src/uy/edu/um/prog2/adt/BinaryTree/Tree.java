@@ -1,6 +1,7 @@
 package uy.edu.um.prog2.adt.BinaryTree;
 
 import uy.edu.um.prog2.adt.MyLinkedList.LinkedList;
+import uy.edu.um.prog2.adt.Hash.*;
 
 
 public class Tree<K extends Comparable<K>,T> implements MyTree<K,T> {
@@ -136,11 +137,11 @@ public class Tree<K extends Comparable<K>,T> implements MyTree<K,T> {
     //funcion que realice el recorrido del arbol en orden (izquierda, raiz, derecha)
     @Override
     public LinkedList inOrder() {
-        LinkedList<K> list = new LinkedList<>();
+        LinkedList<T> list = new LinkedList<>();
         Node<K,T> currentNode = this.root;
         while (currentNode != null){
             if (currentNode.leftChild == null){
-                list.add(currentNode.key);
+                list.add(currentNode.data);
                 currentNode = currentNode.rightChild;
             }else{
                 Node<K,T> predecesor = currentNode.leftChild;
@@ -152,7 +153,7 @@ public class Tree<K extends Comparable<K>,T> implements MyTree<K,T> {
                     currentNode = currentNode.leftChild;
                 }else{
                     predecesor.rightChild = null;
-                    list.add(currentNode.key);
+                    list.add(currentNode.data);
                     currentNode = currentNode.rightChild;
                 }
             }
@@ -161,6 +162,37 @@ public class Tree<K extends Comparable<K>,T> implements MyTree<K,T> {
         return list;
 
     }
+    //funcion que realice el recorrido del arbol en preorden (derecha, raiz, izquierda) y que me guarde los values y la key en una lista y que despues los imprima a ambos
+    @Override
+    public LinkedList postorder() {
+        LinkedList<T> list = new LinkedList<>();
+        Node<K,T> currentNode = this.root;
+        while (currentNode != null){
+            if (currentNode.rightChild == null){
+                list.add(currentNode.data);
+                currentNode = currentNode.leftChild;
+            }else{
+                Node<K,T> sucesor = currentNode.rightChild;
+                while (sucesor.leftChild != null && sucesor.leftChild != currentNode){
+                    sucesor = sucesor.leftChild;
+                }
+                if (sucesor.leftChild == null){
+                    sucesor.leftChild = currentNode;
+                    currentNode = currentNode.rightChild;
+                }else{
+                    sucesor.leftChild = null;
+                    list.add(currentNode.data);
+                    currentNode = currentNode.leftChild;
+                }
+            }
+        }
+
+        return list;
+
+    }
+
+
+
 
     @Override
     public boolean contains(K key) {

@@ -3,18 +3,21 @@ package Entities;
 import uy.edu.um.prog2.adt.MyLinkedList.LinkedList;
 import uy.edu.um.prog2.adt.MyLinkedList.MyList;
 
+
 public class Tweet {
     private long id;
     private String content;
     private String source;
+    private String fecha;
     private boolean is_retweet;
 
     private MyList<HashTag> HashTags = new LinkedList<>();
 
-    public Tweet(long id, String content, String source, boolean is_retweet) {
+    public Tweet(long id, String content, String source,String fecha,  boolean is_retweet) {
         this.id = id;
         this.content = content;
         this.source = source;
+        this.fecha = fecha;
         this.is_retweet = is_retweet;
     }
 
@@ -48,5 +51,13 @@ public class Tweet {
 
     public void setIs_retweet(boolean is_retweet) {
         this.is_retweet = is_retweet;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 }
