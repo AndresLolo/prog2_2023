@@ -1,3 +1,5 @@
+import org.apache.commons.csv.CSVParser;
+
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.util.regex.Pattern;
@@ -14,6 +16,9 @@ public class ProgMain {
                     opcion = scanner.nextInt();
 
                     switch (opcion) {
+                        case 0:
+                            CVSreader.cargardatos();
+                            break;
                         case 1:
                             try{
                                 listarPilotosMencionadosEnMes(scanner);
@@ -68,6 +73,7 @@ public class ProgMain {
 
             public static void mostrarMenu() {
                 System.out.println("MENU");
+                System.out.println("0. Cargar datos");
                 System.out.println("1. Listar los 10 pilotos activos más mencionados en un mes");
                 System.out.println("2. Listar los 15 usuarios con más tweets");
                 System.out.println("3. Contar la cantidad de hashtags distintos para un día dado");
@@ -154,6 +160,8 @@ public class ProgMain {
             System.out.print("Ingrese la palabra o frase específica: ");
             scanner.nextLine(); // Consumir el salto de línea anterior
             String palabra = scanner.nextLine();
+            System.out.println(CVSreader.encontrartweet(palabra));
+
 
             // Lógica para contar tweets con una palabra o frase específica
             System.out.println("Opción 6 seleccionada. Palabra o frase: " + palabra);
