@@ -75,62 +75,63 @@ public class CVSreader {
 
             for (int i = 0; i < tweets.size(); i++) {
                 if (tweets.get(i).getFecha().contains(anio) && tweets.get(i).getFecha().contains(mes)) {
-                    if (tweets.get(i).getContent().contains("Max Verstappen")) {
+                    String content = tweets.get(i).getContent();
+                    if (content.contains("Max Verstappen")) {
                         Max++;
                     }
 
-                    if (tweets.get(i).getContent().contains("Charles Leclerc")) {
+                    if (content.contains("Charles Leclerc")) {
                         Charles++;
                     }
-                    if (tweets.get(i).getContent().contains("Carlos Sainz")) {
+                    if (content.contains("Carlos Sainz")) {
                         Carlos++;
                     }
-                    if (tweets.get(i).getContent().contains("Lewis Hamilton")) {
+                    if (content.contains("Lewis Hamilton")) {
                         Lewis++;
                     }
-                    if (tweets.get(i).getContent().contains("George Russell")) {
+                    if (content.contains("George Russell")) {
                         George++;
                     }
-                    if (tweets.get(i).getContent().contains("Fernando Alonso")) {
+                    if (content.contains("Fernando Alonso")) {
                         Fernando++;
                     }
-                    if (tweets.get(i).getContent().contains("Lance Stroll")) {
+                    if (content.contains("Lance Stroll")) {
                         Lance++;
                     }
-                    if (tweets.get(i).getContent().contains("Lando Norris")) {
+                    if (content.contains("Lando Norris")) {
                         Lando++;
                     }
-                    if (tweets.get(i).getContent().contains("Oscar Piastri")) {
+                    if (content.contains("Oscar Piastri")) {
                         Oscar++;
                     }
-                    if (tweets.get(i).getContent().contains("Pierre Gasly")) {
+                    if (content.contains("Pierre Gasly")) {
                         Pierre++;
                     }
-                    if (tweets.get(i).getContent().contains("Esteban Ocon")) {
+                    if (content.contains("Esteban Ocon")) {
                         Esteban++;
                     }
-                    if (tweets.get(i).getContent().contains("Nyck de Vries")) {
+                    if (content.contains("Nyck de Vries")) {
                         Nyck++;
                     }
-                    if (tweets.get(i).getContent().contains("Yuki Tsunoda")) {
+                    if (content.contains("Yuki Tsunoda")) {
                         Yuki++;
                     }
-                    if (tweets.get(i).getContent().contains("Alexander Albon")) {
+                    if (content.contains("Alexander Albon")) {
                         Alexander++;
                     }
-                    if (tweets.get(i).getContent().contains("Logan Sargeant")) {
+                    if (content.contains("Logan Sargeant")) {
                         Logan++;
                     }
-                    if (tweets.get(i).getContent().contains("Guanyu Zhou")) {
+                    if (content.contains("Guanyu Zhou")) {
                         Guanyu++;
                     }
-                    if (tweets.get(i).getContent().contains("Valtteri Bottas")) {
+                    if (content.contains("Valtteri Bottas")) {
                         Valtteri++;
                     }
-                    if (tweets.get(i).getContent().contains("Nico Hulkenberg")) {
+                    if (content.contains("Nico Hulkenberg")) {
                         Nico++;
                     }
-                    if (tweets.get(i).getContent().contains("Kevin Magnussen")) {
+                    if (content.contains("Kevin Magnussen")) {
                         Kevin++;
                     }
                 }
