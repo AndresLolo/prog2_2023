@@ -6,7 +6,7 @@ import uy.edu.um.prog2.adt.Hash.*;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.util.regex.Pattern;
-import java.time.YearMonth;
+
 public class ProgMain {
 
             public static void main(String[] args) {

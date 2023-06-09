@@ -1,5 +1,6 @@
 
-import Entities.Tweet;
+import Entities.*;
+
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -12,6 +13,7 @@ import java.io.IOException;
 
 public class CVSreader {
         static MyList<Tweet> tweets = new LinkedList<>();
+
         public static void cargardatos(){
             try (CSVParser parser = new CSVParser(new FileReader("Obliogatorio/src/f1_dataset_test.csv"), CSVFormat.DEFAULT)) {
                 for (CSVRecord record : parser) {
@@ -71,6 +73,7 @@ public class CVSreader {
             int Valtteri = 0;
             int Nico = 0;
             int Kevin = 0;
+
             Tree pilotos = new Tree();
 
             for (int i = 0; i < tweets.size(); i++) {
@@ -139,26 +142,26 @@ public class CVSreader {
 
                 ;
             }
-            pilotos.insert(Max, "Max Verstappen"+""+Max);
-            pilotos.insert(Sergio, "Sergio Perez"+""+Sergio);
-            pilotos.insert(Charles, "Charles Leclerc"+""+Charles);
-            pilotos.insert(Carlos, "Carlos Sainz"+""+Carlos);
-            pilotos.insert(Lewis, "Lewis Hamilton"+""+Lewis);
-            pilotos.insert(George, "George Russell"+""+George);
-            pilotos.insert(Fernando, "Fernando Alonso"+""+Fernando);
-            pilotos.insert(Lance, "Lance Stroll"+""+Lance);
-            pilotos.insert(Lando, "Lando Norris"+""+Lando);
-            pilotos.insert(Oscar, "Oscar Piastri"+""+Oscar);
-            pilotos.insert(Pierre, "Pierre Gasly"+""+Pierre);
-            pilotos.insert(Esteban, "Esteban Ocon"+ ""+Esteban);
-            pilotos.insert(Nyck, "Nyck de Vries"+""+Nyck);
-            pilotos.insert(Yuki, "Yuki Tsunoda"+""+Yuki);
-            pilotos.insert(Alexander, "Alexander Albon"+""+Alexander);
-            pilotos.insert(Logan, "Logan Sargeant"+""+Logan);
-            pilotos.insert(Guanyu, "Guanyu Zhou"+""+Guanyu);
-            pilotos.insert(Valtteri, "Valtteri Bottas"+""+Valtteri);
-            pilotos.insert(Nico, "Nico Hulkenberg"+""+Nico);
-            pilotos.insert(Kevin, "Kevin Magnussen"+""+Kevin);
+            pilotos.insert(Max, "Max Verstappen:"+Max);
+            pilotos.insert(Sergio, "Sergio Perez:"+Sergio);
+            pilotos.insert(Charles, "Charles Leclerc:"+Charles);
+            pilotos.insert(Carlos, "Carlos Sainz:"+Carlos);
+            pilotos.insert(Lewis, "Lewis Hamilton:"+Lewis);
+            pilotos.insert(George, "George Russell:"+George);
+            pilotos.insert(Fernando, "Fernando Alonso:"+Fernando);
+            pilotos.insert(Lance, "Lance Stroll:"+Lance);
+            pilotos.insert(Lando, "Lando Norris:"+Lando);
+            pilotos.insert(Oscar, "Oscar Piastri:"+Oscar);
+            pilotos.insert(Pierre, "Pierre Gasly:"+Pierre);
+            pilotos.insert(Esteban, "Esteban Ocon:"+Esteban);
+            pilotos.insert(Nyck, "Nyck de Vries:"+Nyck);
+            pilotos.insert(Yuki, "Yuki Tsunoda:"+Yuki);
+            pilotos.insert(Alexander, "Alexander Albon:"+Alexander);
+            pilotos.insert(Logan, "Logan Sargeant:"+Logan);
+            pilotos.insert(Guanyu, "Guanyu Zhou:"+Guanyu);
+            pilotos.insert(Valtteri, "Valtteri Bottas:"+Valtteri);
+            pilotos.insert(Nico, "Nico Hulkenberg:"+Nico);
+            pilotos.insert(Kevin, "Kevin Magnussen:"+Kevin);
             //quiero que me de los primeros 10 datos de esta lista
 
             LinkedList list = pilotos.postorder();
@@ -172,27 +175,12 @@ public class CVSreader {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         public static void main(String[] args) {
 
 
 
-            }
-            }
+        }
+}
 
 
 
