@@ -3,6 +3,8 @@ package Entities;
 import uy.edu.um.prog2.adt.MyLinkedList.LinkedList;
 import uy.edu.um.prog2.adt.MyLinkedList.MyList;
 
+import java.util.Objects;
+
 
 public class Tweet {
     private long id;
@@ -13,12 +15,14 @@ public class Tweet {
 
     private MyList<HashTag> HashTags = new LinkedList<>();
 
-    public Tweet(long id, String content, String source,String fecha,  boolean is_retweet) {
+    public Tweet(long id, String content, String source,String fecha,  boolean is_retweet, MyList<HashTag> HashTags) {
         this.id = id;
         this.content = content;
         this.source = source;
         this.fecha = fecha;
         this.is_retweet = is_retweet;
+        this.HashTags = HashTags;
+
     }
 
     public long getId() {
@@ -60,4 +64,22 @@ public class Tweet {
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
+
+    public MyList<HashTag> getHashTags() {
+        return HashTags;
+    }
+
+    public void setHashTags(MyList<HashTag> hashTags) {
+        HashTags = hashTags;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Tweet tweet = (Tweet) o;
+        return Objects.equals(content, tweet.content);
+    }
+
+
 }

@@ -135,6 +135,10 @@ public class ProgMain {
             }
 
             LocalDate fecha = LocalDate.parse(fechaInput);
+            int cantidadHashtags = CVSreader.cantidadHashtags(fechaInput);
+            System.out.println("La cantidad de hashtags distintos para la fecha " + fechaInput + " es: " + cantidadHashtags);
+
+
 
             // Lógica para contar hashtags distintos para una fecha específica
             System.out.println("Opción 3 seleccionada. Fecha: " + fecha);
@@ -169,11 +173,17 @@ public class ProgMain {
             System.out.print("Ingrese la palabra o frase específica: ");
             scanner.nextLine(); // Consumir el salto de línea anterior
             String palabra = scanner.nextLine();
-            System.out.println(CVSreader.encontrartweet(palabra));
+            int cantidad= CVSreader.cantidadTweets(palabra);
+            System.out.println("La cantidad de tweets con la palabra o frase "+palabra+" es: "+cantidad);
+
 
 
             // Lógica para contar tweets con una palabra o frase específica
             System.out.println("Opción 6 seleccionada. Palabra o frase: " + palabra);
+        }
+
+        public static void mostrar(Scanner scanner){
+
         }
 }
 

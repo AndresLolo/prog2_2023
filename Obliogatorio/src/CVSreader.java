@@ -11,10 +11,12 @@ import uy.edu.um.prog2.adt.Hash.*;
 import java.io.FileReader;
 import java.io.IOException;
 
+
 public class CVSreader {
         static MyList<Tweet> tweets = new LinkedList<>();
+        static MyHash hashtag= new HashImpl<>(100000);
 
-        public static void cargardatos(){
+        public static void cargardatos() {
             try (CSVParser parser = new CSVParser(new FileReader("Obliogatorio/src/f1_dataset_test.csv"), CSVFormat.DEFAULT)) {
                 for (CSVRecord record : parser) {
                     long id = 0;
@@ -28,29 +30,38 @@ public class CVSreader {
                     }
                     String col14 = record.get(13);
                     boolean valor;
-                    if (col14.contains("True")) {
+                    if (col14.equals("True")) {
                         valor = true;
                     } else {
                         valor = false;
                     }
-                    Tweet newtweet = new Tweet(id, contenidoTweet, user,fecha,  valor);
-                    tweets.add(newtweet);
-                }
+                    String[] hashtag1 = record.get(11).replace("[", "").replace("]", "").replace("'", "").replace(" ", "").split(",");
+                    MyList<HashTag> listahashtag = new LinkedList<>();
+                    for(String hashtag3 : hashtag1){
+                        listahashtag.add(new HashTag(fecha, hashtag3));
+                        hashtag.put(hashtag3, new HashTag(fecha, hashtag3));
+                    }
 
+                    Tweet newtweet = new Tweet(id, contenidoTweet, user, fecha, valor, listahashtag);
+                    tweets.add(newtweet);
+
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         }
-        public static int encontrartweet(String frase){
+
+        public static int cantidadTweets(String palabra){
             int cantidad = 0;
-            for(int i = 0; i < tweets.size(); i++){
-                if (tweets.get(i).getContent().contains(frase)){
+            for (int i = 0; i < tweets.size(); i++) {
+                Tweet tweet = tweets.get(i);
+                if (tweet.getContent().contains(palabra)) {
                     cantidad++;
                 }
             }
             return cantidad;
         }
+
         //listar los diez pilotos con mas menciones en los tweets en un anio y mes especifico
         public static LinkedList PilotosMencionados(String anio, String mes) {
             int Max = 0;
@@ -170,16 +181,24 @@ public class CVSreader {
 
             return list;
         }
-
-
-
-
-
-        public static void main(String[] args) {
-
-
-
+        //Cantidad de hashtags distintos para un día dado. El día será ingresado en el formato YYYY-MM-DD. por favor hace que si se repitan hastags iguales no los cuente, utilizando la lista hashtag la cual es una hash sabiendo que en su key esta la fecha y en su value el hashtag
+        public static int cantidadHashtags(String fecha) {
+            int contador = 0;
+            for (int i = 0; i < tweets.size(); i++) {
+                if (tweets.get(i).getFecha().contains(fecha)) {
+                    for (int j = 0; j < tweets.get(i).getHashTags().size(); j++) {
+                        if (hashtag.get(tweets.get(i).getHashTags().get(j).getText()) != null) {
+                            contador++;
+                            hashtag.remove(tweets.get(i).getHashTags().get(j).getText());
+                        }
+                    }
+                }
+            }
+            return contador;
         }
+
+    //Hashtag más usado para un día dado, sin tener en cuenta #f1. El día será ingresado en el formato YYYY-MM-DD.
+
 }
 
 
