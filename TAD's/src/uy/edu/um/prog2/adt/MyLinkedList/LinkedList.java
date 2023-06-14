@@ -13,12 +13,7 @@ public class LinkedList<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
             this.first = new Nodo<>(value);
             this.last = this.first;
         }else{
-            Nodo<T> temp = this.first;
-            while(temp.getNext()!= null){
-
-                temp = temp.getNext();
-
-            }
+            Nodo<T> temp = this.last;
             Nodo<T> newNode = new Nodo<>(value);
             temp.setNext(newNode);
             this.last = newNode;

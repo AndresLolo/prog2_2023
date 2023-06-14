@@ -13,66 +13,73 @@ public class ProgMain {
                 Scanner scanner = new Scanner(System.in);
                 int opcion;
 
-                do {
-                    mostrarMenu();
-                    System.out.print("Ingrese una opción: ");
-                    opcion = scanner.nextInt();
+                    try {
+                        do {
+                            mostrarMenu();
+                            System.out.print("Ingrese una opción: ");
+                            opcion = scanner.nextInt();
 
-                    switch (opcion) {
-                        case 0:
-                            CVSreader.cargardatos();
-                            break;
-                        case 1:
-                            try{
-                                listarPilotosMencionadosEnMes(scanner);
-                            }catch (Exception e){
-                                System.out.println("Algun dato ingresado es incorrecto");
+                            switch (opcion) {
+                                case 0:
+                                    CVSreader.cargardatos();
+                                    break;
+                                case 1:
+                                    try {
+                                        listarPilotosMencionadosEnMes(scanner);
+                                    } catch (Exception e) {
+                                        System.out.println("Algun dato ingresado es incorrecto");
+                                    }
+                                    break;
+                                case 2:
+                                    try {
+                                        listarUsuariosConMasTweets(scanner);
+                                    } catch (Exception e) {
+                                        System.out.println("Algun dato ingresado es incorrecto");
+                                    }
+                                    break;
+                                case 3:
+                                    try {
+                                        contarHashtagsDistintos(scanner);
+                                    } catch (Exception e) {
+                                        System.out.println("Fecha inválida. Por favor, ingrese una fecha válida en el formato YYYY-MM-DD.");
+                                    }
+                                    break;
+                                case 4:
+                                    try {
+                                        hashtagMasUsado(scanner);
+                                    } catch (Exception e) {
+                                        System.out.println("Algun dato ingresado es incorrecto");
+                                    }
+                                    break;
+                                case 5:
+                                    try {
+                                        listarCuentasConMasFavoritos(scanner);
+                                    } catch (Exception e) {
+                                        System.out.println("Algun dato ingresado es incorrecto");
+                                    }
+                                    break;
+                                case 6:
+                                    try {
+                                        contarTweetsConPalabra(scanner);
+                                    } catch (Exception e) {
+                                        System.out.println("Algun dato ingresado es incorrecto");
+                                    }
+                                    break;
+                                case 7:
+                                    System.out.println("¡Hasta luego!");
+                                    break;
+                                default:
+                                    System.out.println("Opción inválida. Por favor, ingrese una opción válida.");
+                                    break;
                             }
-                            break;
-                        case 2:
-                            try {
-                                listarUsuariosConMasTweets(scanner);
-                            }catch (Exception e){
-                                System.out.println("Algun dato ingresado es incorrecto");
-                            }
-                            break;
-                        case 3:
-                            try{
-                                contarHashtagsDistintos(scanner);
-                            }catch(Exception e){
-                                System.out.println("Fecha inválida. Por favor, ingrese una fecha válida en el formato YYYY-MM-DD.");
-                            }
-                            break;
-                        case 4:
-                            try{
-                            hashtagMasUsado(scanner);
-                            }catch (Exception e){
-                                System.out.println("Algun dato ingresado es incorrecto");
-                            }
-                            break;
-                        case 5:
-                            try{
-                            listarCuentasConMasFavoritos(scanner);
-                            }catch (Exception e){
-                                System.out.println("Algun dato ingresado es incorrecto");
-                            }
-                            break;
-                        case 6:
-                            try{
-                            contarTweetsConPalabra(scanner);
-                            }catch (Exception e){
-                                System.out.println("Algun dato ingresado es incorrecto");
-                            }
-                            break;
-                        case 7:
-                            System.out.println("¡Hasta luego!");
-                            break;
-                        default:
-                            System.out.println("Opción inválida. Por favor, ingrese una opción válida.");
-                            break;
+                        } while (opcion != 7);
+                    } catch (Exception e) {
+                        System.out.println("Algun dato ingresado es incorrecto");
+
                     }
-                } while (opcion != 7);
-            }
+                }
+
+
 
             public static void mostrarMenu() {
                 System.out.println("MENU");
@@ -105,11 +112,7 @@ public class ProgMain {
 
             int anio = Integer.parseInt(anioInput);
             int mes = Integer.parseInt(mesInput);
-            LinkedList list = CVSreader.PilotosMencionados(anioInput,mesInput);
-            for (int i = 0; i < 10; i++) {
-                System.out.println(list.get(i));
 
-            }
 
 
             // Lógica para listar pilotos mencionados en un mes y año específicos
@@ -135,8 +138,7 @@ public class ProgMain {
             }
 
             LocalDate fecha = LocalDate.parse(fechaInput);
-            int cantidadHashtags = CVSreader.cantidadHashtags(fechaInput);
-            System.out.println("La cantidad de hashtags distintos para la fecha " + fechaInput + " es: " + cantidadHashtags);
+
 
 
 
@@ -173,8 +175,6 @@ public class ProgMain {
             System.out.print("Ingrese la palabra o frase específica: ");
             scanner.nextLine(); // Consumir el salto de línea anterior
             String palabra = scanner.nextLine();
-            int cantidad= CVSreader.cantidadTweets(palabra);
-            System.out.println("La cantidad de tweets con la palabra o frase "+palabra+" es: "+cantidad);
 
 
 

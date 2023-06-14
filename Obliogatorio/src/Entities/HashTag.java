@@ -7,23 +7,23 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class HashTag {
-    private String fecha;
+    private long id;
     private String text;
 
 
-    private MyList<Tweet> tweets = new LinkedList<>();
 
-    public HashTag(String fecha, String text) {
-        this.fecha = fecha;
+
+    public HashTag(long id, String text) {
+        this.id = id;
         this.text = text;
     }
 
-    public String getFecha() {
-        return fecha;
+    public long getId() {
+        return id;
     }
 
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getText() {

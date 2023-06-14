@@ -1,10 +1,12 @@
 package uy.edu.um.prog2.adt.Hash;
 
 
+import Entities.Tweet;
 
 public class HashImpl<K,T> implements MyHash<K,T> {
     private int capacity;
     private Node[] table;
+    private int contadorSize = 0;
 
 
 
@@ -30,6 +32,7 @@ public class HashImpl<K,T> implements MyHash<K,T> {
         Node<K, T> node = new Node<>(key, value);
         if (table[lugar] == null || table[lugar].isDeleted()) {
             table[lugar] = node;
+            contadorSize++;
         } else {
             int i = 1;
             int newPosition = ((key.hashCode() + linearColision(i)) % capacity);
@@ -39,6 +42,7 @@ public class HashImpl<K,T> implements MyHash<K,T> {
             while (table[newPosition] != null && !table[newPosition].isDeleted() && i <= capacity) {
                 if (table[newPosition].getKey().equals(key)) {
                     table[newPosition].setValue(value);
+                    contadorSize++;
                     return;
                 }
                 i++;
@@ -106,6 +110,10 @@ public class HashImpl<K,T> implements MyHash<K,T> {
                 if(newPosition < 0){
                     newPosition = newPosition * -1;
                 }
+
+            }
+            if (table[newPosition] == null) {
+                return false;
             }
             if (i <= capacity && table[newPosition].getKey().equals(key) && !table[newPosition].isDeleted()) {
                 return true;
@@ -115,7 +123,21 @@ public class HashImpl<K,T> implements MyHash<K,T> {
             }
         }
     }
-// funcion que elimina un elemento de la tabla segun la key que tiene
+    //funcion que haga un contain pero del value
+    @Override
+    public boolean containsValue(T value) {
+        for (int i = 0; i < capacity; i++) {
+            if(table[i] != null && table[i].getValue().equals(value)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
+
+    // funcion que elimina un elemento de la tabla segun la key que tiene
     @Override
     public void remove(K clave) {
         int lugar = clave.hashCode() % capacity;
@@ -139,6 +161,7 @@ public class HashImpl<K,T> implements MyHash<K,T> {
             }
             if (i <= capacity) {
                 table[newPosition].setDeleted(true);
+                contadorSize--;
             }
         }
 
@@ -147,13 +170,7 @@ public class HashImpl<K,T> implements MyHash<K,T> {
 
     @Override
     public int size() {
-        int contador = 0;
-        for (int i = 0; i < capacity; i++) {
-            if (table[i] != null && !table[i].isDeleted()) {
-                contador++;
-            }
-        }
-        return contador;
+        return contadorSize;
     }
 
     @Override
