@@ -39,8 +39,8 @@ public class CVSreader {
                 String[] hashtag1 = record.get(11).replace("[", "").replace("]", "").replace("'", "").replace(" ", "").split(",");
                 MyList<HashTag> listahashtag = new LinkedList<>();
                 for (String hashtag3 : hashtag1) {
-                    listahashtag.add(new HashTag(idtweet, hashtag3));
-                    hashtag.put(hashtag3, new HashTag(idtweet, hashtag3));
+                    listahashtag.add(new HashTag(hashtag3, hashtag3));
+                    hashtag.put(hashtag3, new HashTag(hashtag3, hashtag3));
                 }
 
                 Tweet newtweet = new Tweet(idtweet, contenidoTweet, user, fecha, isretweet, listahashtag);
@@ -69,6 +69,15 @@ public class CVSreader {
         int hashPositivo = Math.abs(hash);
         return (long) hashPositivo;
 
+    }
+    public static int contarDistintos(String palabra) {
+        int contador = 0;
+        for (int i = 0; i < tweets.size(); i++) {
+            if (tweets.get(i).getContent().contains(palabra)) {
+                contador++;
+            }
+        }
+        return contador;
     }
 
 

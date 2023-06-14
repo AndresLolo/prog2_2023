@@ -7,22 +7,22 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class HashTag {
-    private long id;
+    private String id;
     private String text;
 
 
 
 
-    public HashTag(long id, String text) {
+    public HashTag(String id, String text) {
         this.id = id;
         this.text = text;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

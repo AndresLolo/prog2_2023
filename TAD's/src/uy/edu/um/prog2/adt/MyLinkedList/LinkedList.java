@@ -7,32 +7,36 @@ import uy.edu.um.prog2.adt.stack.*;
 public class LinkedList<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
     private Nodo<T> first;
     private Nodo<T> last;
+    private int size=0;
     @Override
     public void add(T value) {
         if (this.first == null){
             this.first = new Nodo<>(value);
             this.last = this.first;
+            size++;
         }else{
             Nodo<T> temp = this.last;
             Nodo<T> newNode = new Nodo<>(value);
             temp.setNext(newNode);
             this.last = newNode;
+            size++;
 
         }
     }
 
     @Override
     public T get(int position) {
-        int i = 0;
         Nodo<T> temp = this.first;
-        while(i < position){
-            temp = temp.getNext();
-            if (temp == null){
-                return null;
+        int i = 0;
+        while(temp != null){
+            if(i == position){
+                return temp.getValue();
+            }else{
+                temp = temp.getNext();
+                i++;
             }
-            i++;
         }
-        return temp.getValue();
+        return null;
     }
 
     @Override
@@ -53,14 +57,11 @@ public class LinkedList<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
     @Override
     public boolean contains(T nodo) {
         Nodo<T> temp = this.first;
-        int i = 0;
-        while(temp != null){
-            if(nodo != get(i)){
-                temp = temp.getNext();
-                i++;
-            }else{
+        while (temp != null) {
+            if (temp.getValue().equals(nodo)) {
                 return true;
             }
+            temp = temp.getNext();
         }
         return false;
     }
@@ -105,17 +106,7 @@ public class LinkedList<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
 
     @Override
     public int size() {
-        Nodo<T> temp = this.first;
-        int tamaño = 1;
-        if (temp == null){
-            return 0;
-        }
-        while(temp.getNext()!= null){
-            tamaño++;
-            temp = temp.getNext();
-
-        }
-        return tamaño;
+        return size;
     }
 
     @Override
@@ -145,14 +136,17 @@ public class LinkedList<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
                 }
                 if (temp.getNext().getNext() != null) {
                     temp.setNext(temp.getNext().getNext());
+                    size--;
                 } else {
                     temp.setNext(null);
                     this.last = temp;
+                    size--;
                 }
             } else {
 
                 this.first = temp.getNext();
                 temp.setValue(null);
+                size--;
             }
         }
 

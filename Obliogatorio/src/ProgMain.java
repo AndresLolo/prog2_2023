@@ -175,7 +175,8 @@ public class ProgMain {
             System.out.print("Ingrese la palabra o frase específica: ");
             scanner.nextLine(); // Consumir el salto de línea anterior
             String palabra = scanner.nextLine();
-
+            int cantidad= CVSreader.contarDistintos(palabra);
+            System.out.println("La cantidad de tweets con la palabra o frase "+palabra+" es: "+cantidad);
 
 
             // Lógica para contar tweets con una palabra o frase específica
