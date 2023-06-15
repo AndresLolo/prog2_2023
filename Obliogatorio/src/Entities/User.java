@@ -10,12 +10,17 @@ public class User {
 
     private String name;
 
+    private boolean verificado;
+    private int cantidadTweets;
+
     private MyList<Tweet> tweets;;
 
-    public User(long id, String name) {
+    public User(long id, String name, boolean verificado) {
         this.tweets = new LinkedList<>();
         this.name = name;
         this.id = id;
+        this.verificado = verificado;
+        this.cantidadTweets = 0;
     }
 
     public long getId() {
@@ -43,6 +48,24 @@ public class User {
     }
 
     public void puttweet(Tweet tweet) {
+
         this.tweets.add(tweet);
+        this.cantidadTweets++;
+    }
+
+    public boolean isVerificado() {
+        return verificado;
+    }
+
+    public void setVerificado(boolean verificado) {
+        this.verificado = verificado;
+    }
+
+    public int getCantidadTweets() {
+        return cantidadTweets;
+    }
+
+    public void setCantidadTweets(int cantidadTweets) {
+        this.cantidadTweets = cantidadTweets;
     }
 }

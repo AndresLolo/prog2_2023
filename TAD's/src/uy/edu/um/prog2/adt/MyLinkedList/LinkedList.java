@@ -4,22 +4,22 @@ import uy.edu.um.prog2.adt.queue.*;
 import uy.edu.um.prog2.adt.stack.*;
 
 
-public class LinkedList<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
+public class LinkedList<T> implements MyList<T>, MyQueue<T>, MyStack<T>,MyPrioridadQueue<T> {
     private Nodo<T> first;
     private Nodo<T> last;
-    private int size=0;
+
     @Override
     public void add(T value) {
         if (this.first == null){
             this.first = new Nodo<>(value);
             this.last = this.first;
-            size++;
+
         }else{
             Nodo<T> temp = this.last;
             Nodo<T> newNode = new Nodo<>(value);
             temp.setNext(newNode);
             this.last = newNode;
-            size++;
+
 
         }
     }
@@ -106,6 +106,12 @@ public class LinkedList<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
 
     @Override
     public int size() {
+        int size = 0;
+        Nodo<T> temp = this.first;
+        while(temp != null){
+            size++;
+            temp = temp.getNext();
+        }
         return size;
     }
 
@@ -136,17 +142,17 @@ public class LinkedList<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
                 }
                 if (temp.getNext().getNext() != null) {
                     temp.setNext(temp.getNext().getNext());
-                    size--;
+
                 } else {
                     temp.setNext(null);
                     this.last = temp;
-                    size--;
+
                 }
             } else {
 
                 this.first = temp.getNext();
                 temp.setValue(null);
-                size--;
+
             }
         }
 
@@ -158,5 +164,35 @@ public class LinkedList<T> implements MyList<T>, MyQueue<T>, MyStack<T> {
         this.first = null;
         this.last = null;
     }
+    public boolean isEmpty() {
+        return (first==null);
+    }
 
+    @Override
+    public void enqueueConPrioridad(T element, int priority) {
+        Nodo<T> newNode = new Nodo<>(element, priority);
+
+        if (isEmpty()) {
+            last =first = newNode;
+            return;
+        }
+
+        if (first.prioridad< priority) {
+            newNode.setNext(first);
+            first = newNode;
+        } else {
+            Nodo<T> current = first;
+
+            while (current.getNext() != null && current.getNext().prioridad >= priority) {
+                current = current.getNext();
+            }
+
+            newNode.setNext(current.getNext());
+            current.setNext(newNode);
+
+            if (current == last) {
+                first = newNode;
+            }
+        }
+    }
 }

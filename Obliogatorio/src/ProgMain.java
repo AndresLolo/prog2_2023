@@ -2,6 +2,7 @@ import org.apache.commons.csv.CSVParser;
 import uy.edu.um.prog2.adt.MyLinkedList.*;
 
 import uy.edu.um.prog2.adt.Hash.*;
+import uy.edu.um.prog2.adt.queue.QueueVacia;
 
 import java.util.Scanner;
 import java.time.LocalDate;
@@ -120,9 +121,10 @@ public class ProgMain {
         }
 
 
-    public static void listarUsuariosConMasTweets(Scanner scanner) {
+    public static void listarUsuariosConMasTweets(Scanner scanner) throws QueueVacia {
             // Lógica para listar usuarios con más tweets
             System.out.println("Opción 2 seleccionada.");
+            CVSreader.usuariosConMasTweets();
         }
 
         public static void contarHashtagsDistintos(Scanner scanner) {
@@ -138,6 +140,8 @@ public class ProgMain {
             }
 
             LocalDate fecha = LocalDate.parse(fechaInput);
+            int cantidadHashtags = CVSreader.cantHashtag(fechaInput);
+            System.out.println("La cantidad de hashtags distintos para la fecha "+fecha+" es: "+cantidadHashtags);
 
 
 
@@ -160,7 +164,7 @@ public class ProgMain {
             }
 
             LocalDate fecha = LocalDate.parse(fechaInput);
-
+            System.out.println("El hashtags mas usado para la fecha "+fecha+" es: "+CVSreader.hashMasUsado(fechaInput));
             // Lógica para mostrar el hashtag más usado para una fecha específica
             System.out.println("Opción 4 seleccionada. Fecha: " + fecha);
         }
