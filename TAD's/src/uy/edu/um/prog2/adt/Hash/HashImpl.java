@@ -33,6 +33,7 @@ public class HashImpl<K,T> implements MyHash<K,T> {
         if (table[lugar] == null || table[lugar].isDeleted()) {
             table[lugar] = node;
             contadorSize++;
+
         } else {
             int i = 1;
             int newPosition = ((key.hashCode() + linearColision(i)) % capacity);
@@ -42,7 +43,6 @@ public class HashImpl<K,T> implements MyHash<K,T> {
             while (table[newPosition] != null && !table[newPosition].isDeleted() && i <= capacity) {
                 if (table[newPosition].getKey().equals(key)) {
                     table[newPosition].setValue(value);
-                    contadorSize++;
                     return;
                 }
                 i++;
@@ -146,6 +146,7 @@ public class HashImpl<K,T> implements MyHash<K,T> {
         }
         if (table[lugar] != null && table[lugar].getKey().equals(clave)) {
             table[lugar].setDeleted(true);
+            contadorSize--;
         } else {
             int i = 1;
             int newPosition = ((clave.hashCode() + linearColision(i)) % capacity);
@@ -215,6 +216,3 @@ public class HashImpl<K,T> implements MyHash<K,T> {
 
 
 }
-
-
-

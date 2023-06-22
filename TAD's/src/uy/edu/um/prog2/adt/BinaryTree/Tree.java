@@ -112,7 +112,7 @@ public class Tree<K extends Comparable<K>,T> implements MyTree<K,T> {
 
     }
 
-//funcion que cuente el numero de nodos
+    //funcion que cuente el numero de nodos
     @Override
     public int size() {
         return contador(this.root);
@@ -213,4 +213,3 @@ public class Tree<K extends Comparable<K>,T> implements MyTree<K,T> {
     }
 
 }
-

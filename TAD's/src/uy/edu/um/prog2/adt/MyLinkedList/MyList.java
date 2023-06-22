@@ -9,4 +9,8 @@ public interface MyList<T> {
     void addLast(T value);
     int size();
     T set(int position, T value);
+
+    T getFirst();
+
+    T removeFirst();
 }

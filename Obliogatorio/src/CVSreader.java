@@ -1,9 +1,10 @@
-
 import Entities.*;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import uy.edu.um.prog2.adt.BinaryHeap.BinaryHeap;
+import uy.edu.um.prog2.adt.BinaryTree.Tree;
 import uy.edu.um.prog2.adt.MyLinkedList.*;
 import uy.edu.um.prog2.adt.queue.*;
 
@@ -11,19 +12,22 @@ import uy.edu.um.prog2.adt.Hash.*;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.BufferedReader;
 
 
 public class CVSreader {
     static MyList<Tweet> tweets = new LinkedList<>();
     static MyHash hashtag = new HashImpl<>(100000);
-    static MyHash<Long, User> usuarios = new HashImpl<>(100000);
+    static MyHash<Long, User> usuarios = new HashImpl<>(26242);
     static int canttweets = 0;
     static MyList <String> Contenido = new LinkedList<>();
     public static MyList<User> usuarioslista = new LinkedList<>();
+    public static MyList<Pilotos> pilotos = new LinkedList<>();
 
     public static void cargardatos() {
-        try (CSVParser parser = new CSVParser(new FileReader("Obliogatorio/src/f1_dataset_test.csv"), CSVFormat.DEFAULT)) {
+        try (CSVParser parser = new CSVParser(new FileReader("DATA/f1_dataset_test.csv"), CSVFormat.DEFAULT)) {
             parser.iterator().next();
+            int lugar = 0;
             for (CSVRecord record : parser) {
 
                 String contenidoTweet = record.get(10);
@@ -33,6 +37,17 @@ public class CVSreader {
                 long idUser = idUnico(fechaCreado);
                 String nombre = record.get(1);
                 String source = record.get(12);
+                int favoritos;
+                try {
+                    if (record.get(7).contains(".")) {
+                        double doubleValue = Double.parseDouble(record.get(7));
+                        favoritos = (int) Math.round(doubleValue);
+                    } else {
+                        favoritos = Integer.parseInt(record.get(7));
+                    }
+                } catch (NumberFormatException e) {
+                    continue;
+                }
 
                 boolean isretweet;
                 try {
@@ -58,52 +73,122 @@ public class CVSreader {
                 Contenido.add(contenidoTweet);
 
                 //tweets
-                Tweet newtweet = new Tweet(idtweet, contenidoTweet,source , fecha, isretweet, listahashtag);
+                Tweet newtweet = new Tweet(idtweet, contenidoTweet,source , fecha, isretweet, favoritos,listahashtag);
                 tweets.add(newtweet);
                 canttweets++;
 
                 //usuarios
                 if (!usuarios.contains(idUser)) {
-                    User usuarioTemp = new User(idUser, nombre, verificado);
+                    User usuarioTemp = new User(idUser, nombre, verificado, 0, lugar);
                     usuarios.put(usuarioTemp.getId(), usuarioTemp);
-                    usuarioTemp.puttweet(newtweet);
                     usuarioslista.add(usuarioTemp);
-                }
-                else {
+                    usuarios.get(idUser).puttweet(newtweet);
+                    lugar++;
+
+                }else{
                     usuarios.get(idUser).puttweet(newtweet);
                 }
 
+
             }
-            System.out.println("Tweet"+tweets.size());
-            System.out.println("Usuario"+usuarios.size());
-            System.out.println("Hashtag"+hashtag.size());
+
+            System.out.println("Tweets"+tweets.size());
+            System.out.println("Usuarios"+usuarioslista.size());
+            System.out.println("Hashtags"+hashtag.size());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //lector del archivo de pilotos
+        try (BufferedReader br = new BufferedReader(new FileReader("DATA/drivers.txt"))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String nombre = linea;
+                Pilotos piloto = new Pilotos(nombre,0);
+                pilotos.add(piloto);
+
+            }
+            System.out.println("Pilotos"+pilotos.size());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    //hacer las fechas id unico
     public static Long idUnico(String fecha) {
-        // Aplicar función hash a la cadena para obtener un valor único
-        int hash = fecha.hashCode();
-        // Convertir el valor único a un valor positivo
-        int hashPositivo = Math.abs(hash);
-        return (long) hashPositivo;
+
+        long hash = fecha.hashCode();
+        long hashPositivo = Math.abs(hash);
+        return  hashPositivo;
 
     }
 
-    //Funcion 6- 10 segundos
-    public static int contarDistintos(String palabra) {
+    //Funcion 1 -  funciona muy lento
+    public static void pilotosMasMencionados(String mes, String anio) throws QueueVacia {
+        Tree binaryTreeList = new Tree();
+        for (int i = 0; i <canttweets ; i++) {
+            if (tweets.get(i).getFecha().contains(mes) && tweets.get(i).getFecha().contains(anio)){
+                for (int j = 0; j <pilotos.size() ; j++) {
+                    if (tweets.get(i).getContent().contains(pilotos.get(j).getName())){
+                        pilotos.get(j).setCantidad(pilotos.get(j).getCantidad()+1);
+                    }
+                }
+            }
+        }
+        for (int i = 0; i <pilotos.size() ; i++) {
+            binaryTreeList.insert(pilotos.get(i).getCantidad(),pilotos.get(i));
+        }
+        LinkedList list = binaryTreeList.postorder();
+        for (int i=0;i<10;i++){
+            Pilotos pilotosordenados = (Pilotos) list.get(i);
+            int cantidad=pilotosordenados.getCantidad();
+            String nombre=pilotosordenados.getName();
+            System.out.println("Nombre: "+nombre+" Cantidad de menciones: "+cantidad);
+        }
+
+    }
+
+    //Funcion 2- 5 segundos
+    public static void usuariosConMasTweets() throws QueueVacia {
+        Tree binaryTreeList = new Tree();
+        for (int i = 0; i <usuarioslista.size() ; i++) {
+            User usuario = usuarioslista.get(i);
+            binaryTreeList.insert(usuario.getCantidadTweets(),usuario);
+
+        }
+        LinkedList list = binaryTreeList.postorder();
+        for (int i=0;i<15;i++){
+            User usuariosordenados = (User) list.get(i);
+            int cantidad=usuariosordenados.getCantidadTweets();
+            String nombre=usuariosordenados.getName();
+            String verificado;
+            if (usuariosordenados.isVerificado()){
+                verificado="Si";
+            }
+            else{
+                verificado="No";
+            }
+            System.out.println("Nombre: "+nombre+" Cantidad de tweets: "+cantidad+" //Verificado: "+verificado);
+        }
+    }
+    //Funcion 3 - 10 segundos - hay que bajar el tiempo
+    public static int cantHashtag(String fecha) {
         int contador = 0;
+        MyList<String> listahashtag = new LinkedList<>();
         for (int i = 0; i < canttweets; i++) {
-            if (Contenido.get(i).contains(palabra)) {
-                contador++;
+            if (tweets.get(i).getFecha().contains(fecha)) {
+                for (int j = 0; j < tweets.get(i).getHashTags().size(); j++) {
+                    if (!listahashtag.contains(tweets.get(i).getHashTags().get(j).getText())) {
+                        listahashtag.add(tweets.get(i).getHashTags().get(j).getText());
+                        contador++;
+                    }
+                }
+
             }
         }
         return contador;
     }
-
-    //Hashtag más usado para un día dado, sin tener en cuenta #f1. El día será ingresado en el formato YYYY-MM-DD.
-    //Funcion 4- 30 segundos
+    //Funcion 4- 14 segundos- hay que bajar el tiempo
     public static String hashMasUsado(String fecha){
         int contador = 0;
         String hashtag = "";
@@ -124,57 +209,35 @@ public class CVSreader {
         }
         return hashtag+" "+contador;
     }
+    //Funcion 5- lo mismo que la 2
+    public static void cuentasFavoritas() throws QueueVacia {
+        Tree binaryTreeList = new Tree();
+        for (int i = 0; i <usuarioslista.size(); i++) {
+            User usuario = usuarioslista.get(i);
+            int prioridad=usuario.getFavorito();
+            binaryTreeList.insert(prioridad,usuario);
+        }
+        LinkedList list = binaryTreeList.postorder();
+        for (int i = 0; i < 7; i++) {
+            User usuariosordenados = (User) list.get(i);
+            String nombre=usuariosordenados.getName();
+            int favoritos = usuariosordenados.getFavorito();
 
-    //Cantidad de hashtags distintos para un día dado. me tiene que dar un numero de cuantos hashtags distintos hay en un dia
-    //Funcion 3 - 25 segundos
-    public static int cantHashtag(String fecha) {
+            int top=i+1;
+            System.out.println("Top. "+top+" "+nombre+" tiene "+ favoritos +" likes");
+        }
+    }
+
+    //Funcion 6- 4 segundos- hay que bajarle el tiempo
+    public static int contarDistintos(String palabra) {
         int contador = 0;
-        MyList<String> listahashtag = new LinkedList<>();
         for (int i = 0; i < canttweets; i++) {
-            if (tweets.get(i).getFecha().contains(fecha)) {
-                for (int j = 0; j < tweets.get(i).getHashTags().size(); j++) {
-                    if (!listahashtag.contains(tweets.get(i).getHashTags().get(j).getText())) {
-                        listahashtag.add(tweets.get(i).getHashTags().get(j).getText());
-                        contador++;
-                    }
-                }
-
+            if (Contenido.get(i).contains(palabra)) {
+                contador++;
             }
         }
         return contador;
     }
 
-    //Funcion 2- 5 segundos
-    public static void usuariosConMasTweets() throws QueueVacia {
-        MyPrioridadQueue<User> usuariosMasTweets = new LinkedList<>();
-        for (int i = 0; i <usuarioslista.size() ; i++) {
-            User usuario = usuarioslista.get(i);
-            int prioridad=usuario.getCantidadTweets();
-            usuariosMasTweets.enqueueConPrioridad(usuario,prioridad);
-
-        }
-        for (int i=0;i<15;i++){
-            User usuarionuevo=usuariosMasTweets.dequeue();
-            int cantidad=usuarionuevo.getCantidadTweets();
-            String nombre=usuarionuevo.getName();
-            String verificado;
-            if (usuarionuevo.isVerificado()){
-                verificado="Si";
-            }
-            else{
-                verificado="No";
-            }
-            System.out.println("Nombre: "+nombre+" //Cantidad de tweets: "+cantidad+" //Verificado: "+verificado);
-        }
-    }
-
 
 }
-
-
-
-
-
-
-
-

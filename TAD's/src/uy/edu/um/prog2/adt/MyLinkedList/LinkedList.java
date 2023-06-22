@@ -169,6 +169,19 @@ public class LinkedList<T> implements MyList<T>, MyQueue<T>, MyStack<T>,MyPriori
     }
 
     @Override
+    public T getFirst() {
+        return get(0);
+    }
+
+    @Override
+    public T removeFirst() {
+        T borrador = getFirst();
+        remove(0);
+        return borrador;
+    }
+
+
+    @Override
     public void enqueueConPrioridad(T element, int priority) {
         Nodo<T> newNode = new Nodo<>(element, priority);
 

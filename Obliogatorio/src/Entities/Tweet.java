@@ -12,16 +12,18 @@ public class Tweet {
     private String source;
     private String fecha;
     private boolean is_retweet;
+    private int favoritos;
 
     private MyList<HashTag> HashTags = new LinkedList<>();
 
-    public Tweet(long id, String content, String source,String fecha,  boolean is_retweet, MyList<HashTag> HashTags) {
+    public Tweet(long id, String content, String source,String fecha,  boolean is_retweet,int favoritos ,MyList<HashTag> HashTags) {
         this.id = id;
         this.content = content;
         this.source = source;
         this.fecha = fecha;
         this.is_retweet = is_retweet;
         this.HashTags = HashTags;
+        this.favoritos = favoritos;
 
     }
 
@@ -71,6 +73,14 @@ public class Tweet {
 
     public void setHashTags(MyList<HashTag> hashTags) {
         HashTags = hashTags;
+    }
+
+    public int getFavoritos() {
+        return favoritos;
+    }
+
+    public void setFavoritos(int favoritos) {
+        this.favoritos = favoritos;
     }
 
     @Override
