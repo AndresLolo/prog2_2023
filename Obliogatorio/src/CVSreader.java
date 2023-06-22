@@ -16,11 +16,10 @@ import java.io.BufferedReader;
 
 
 public class CVSreader {
-    static MyList<Tweet> tweets = new LinkedList<>();
+    static MyHash<Integer, Tweet> tweets = new HashImpl(100000);
     static MyHash hashtag = new HashImpl<>(100000);
     static MyHash<Long, User> usuarios = new HashImpl<>(26242);
-    static int canttweets = 0;
-    static MyList <String> Contenido = new LinkedList<>();
+    static int canttweets;
     public static MyList<User> usuarioslista = new LinkedList<>();
     public static MyList<Pilotos> pilotos = new LinkedList<>();
 
@@ -28,6 +27,7 @@ public class CVSreader {
         try (CSVParser parser = new CSVParser(new FileReader("DATA/f1_dataset_test.csv"), CSVFormat.DEFAULT)) {
             parser.iterator().next();
             int lugar = 0;
+            canttweets = 0;
             for (CSVRecord record : parser) {
 
                 String contenidoTweet = record.get(10);
@@ -69,13 +69,12 @@ public class CVSreader {
                     listahashtag.add(new HashTag(hashtag3, hashtag3));
                     hashtag.put(hashtag3, new HashTag(hashtag3, hashtag3));
                 }
-                //contenido
-                Contenido.add(contenidoTweet);
 
                 //tweets
                 Tweet newtweet = new Tweet(idtweet, contenidoTweet,source , fecha, isretweet, favoritos,listahashtag);
-                tweets.add(newtweet);
                 canttweets++;
+                tweets.put(canttweets, newtweet);
+
 
                 //usuarios
                 if (!usuarios.contains(idUser)) {
@@ -126,7 +125,7 @@ public class CVSreader {
     //Funcion 1 -  funciona muy lento
     public static void pilotosMasMencionados(String mes, String anio) throws QueueVacia {
         Tree binaryTreeList = new Tree();
-        for (int i = 0; i <canttweets ; i++) {
+        for (int i = 1; i <canttweets ; i++) {
             if (tweets.get(i).getFecha().contains(mes) && tweets.get(i).getFecha().contains(anio)){
                 for (int j = 0; j <pilotos.size() ; j++) {
                     if (tweets.get(i).getContent().contains(pilotos.get(j).getName())){
@@ -175,7 +174,7 @@ public class CVSreader {
     public static int cantHashtag(String fecha) {
         int contador = 0;
         MyList<String> listahashtag = new LinkedList<>();
-        for (int i = 0; i < canttweets; i++) {
+        for (int i = 1; i < canttweets; i++) {
             if (tweets.get(i).getFecha().contains(fecha)) {
                 for (int j = 0; j < tweets.get(i).getHashTags().size(); j++) {
                     if (!listahashtag.contains(tweets.get(i).getHashTags().get(j).getText())) {
@@ -192,7 +191,7 @@ public class CVSreader {
     public static String hashMasUsado(String fecha){
         int contador = 0;
         String hashtag = "";
-        for (int i = 0; i < canttweets; i++) {
+        for (int i = 1; i < canttweets; i++) {
             if (tweets.get(i).getFecha().contains(fecha)) {
                 for (int j = 0; j < tweets.get(i).getHashTags().size(); j++) {
                     if (tweets.get(i).getHashTags().get(j).getText().contains("f1") || tweets.get(i).getHashTags().get(j).getText().contains("F1")) {
@@ -231,8 +230,8 @@ public class CVSreader {
     //Funcion 6- 4 segundos- hay que bajarle el tiempo
     public static int contarDistintos(String palabra) {
         int contador = 0;
-        for (int i = 0; i < canttweets; i++) {
-            if (Contenido.get(i).contains(palabra)) {
+        for (int i = 1; i < canttweets; i++) {
+            if (tweets.get(i).getContent().contains(palabra)) {
                 contador++;
             }
         }
