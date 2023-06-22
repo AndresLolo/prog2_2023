@@ -16,11 +16,11 @@ import java.io.BufferedReader;
 
 
 public class CVSreader {
-    static MyHash<Integer, Tweet> tweets = new HashImpl(100000);
-    static MyHash hashtag = new HashImpl<>(100000);
-    static MyHash<Long, User> usuarios = new HashImpl<>(26242);
+    static MyHash<Integer, Tweet> tweets = new HashImpl(1000000);
+    static MyHash hashtag = new HashImpl<>(1000000);
+    static MyHash<Long, User> usuarios = new HashImpl<>(2624200);
     static int canttweets;
-    public static MyList<User> usuarioslista = new LinkedList<>();
+    public static MyHash<Integer,User> usuarioslista = new HashImpl<>(1000000);
     public static MyList<Pilotos> pilotos = new LinkedList<>();
 
     public static void cargardatos() {
@@ -28,6 +28,7 @@ public class CVSreader {
             parser.iterator().next();
             int lugar = 0;
             canttweets = 0;
+            int cantidadususarios = 0;
             for (CSVRecord record : parser) {
 
                 String contenidoTweet = record.get(10);
@@ -80,7 +81,8 @@ public class CVSreader {
                 if (!usuarios.contains(idUser)) {
                     User usuarioTemp = new User(idUser, nombre, verificado, 0, lugar);
                     usuarios.put(usuarioTemp.getId(), usuarioTemp);
-                    usuarioslista.add(usuarioTemp);
+                    cantidadususarios++;
+                    usuarioslista.put(cantidadususarios, usuarioTemp);
                     usuarios.get(idUser).puttweet(newtweet);
                     lugar++;
 
@@ -148,9 +150,9 @@ public class CVSreader {
     }
 
     //Funcion 2- 5 segundos
-    public static void usuariosConMasTweets() throws QueueVacia {
+    public static void usuariosConMasTweets()  {
         Tree binaryTreeList = new Tree();
-        for (int i = 0; i <usuarioslista.size() ; i++) {
+        for (int i = 1; i <usuarioslista.size() ; i++) {
             User usuario = usuarioslista.get(i);
             binaryTreeList.insert(usuario.getCantidadTweets(),usuario);
 
@@ -211,7 +213,7 @@ public class CVSreader {
     //Funcion 5- lo mismo que la 2
     public static void cuentasFavoritas() throws QueueVacia {
         Tree binaryTreeList = new Tree();
-        for (int i = 0; i <usuarioslista.size(); i++) {
+        for (int i = 1; i <usuarioslista.size(); i++) {
             User usuario = usuarioslista.get(i);
             int prioridad=usuario.getFavorito();
             binaryTreeList.insert(prioridad,usuario);
