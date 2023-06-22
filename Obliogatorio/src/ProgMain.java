@@ -1,7 +1,5 @@
-import org.apache.commons.csv.CSVParser;
-import uy.edu.um.prog2.adt.MyLinkedList.*;
+import Entities.Formula1;
 
-import uy.edu.um.prog2.adt.Hash.*;
 import uy.edu.um.prog2.adt.queue.QueueVacia;
 
 import java.util.Scanner;
@@ -22,7 +20,7 @@ public class ProgMain {
 
                 switch (opcion) {
                     case 0:
-                        CVSreader.cargardatos();
+                        Formula1.cargardatos();
                         break;
                     case 1:
                         try {
@@ -80,8 +78,6 @@ public class ProgMain {
         }
     }
 
-
-
     public static void mostrarMenu() {
         System.out.println("MENU");
         System.out.println("0. Cargar datos");
@@ -113,9 +109,7 @@ public class ProgMain {
 
         int anio = Integer.parseInt(anioInput);
         int mes = Integer.parseInt(mesInput);
-        CVSreader.pilotosMasMencionados(anioInput, mesInput);
-
-
+        Formula1.pilotosMasMencionados(anioInput, mesInput);
 
         // Lógica para listar pilotos mencionados en un mes y año específicos
         System.out.println("Opción 1 seleccionada. Año: " + anio + ", Mes: " + mes);
@@ -125,7 +119,7 @@ public class ProgMain {
     public static void listarUsuariosConMasTweets(Scanner scanner) throws QueueVacia {
         // Lógica para listar usuarios con más tweets
         System.out.println("Opción 2 seleccionada.");
-        CVSreader.usuariosConMasTweets();
+        Formula1.usuariosConMasTweets();
     }
 
     public static void contarHashtagsDistintos(Scanner scanner) {
@@ -141,11 +135,8 @@ public class ProgMain {
         }
 
         LocalDate fecha = LocalDate.parse(fechaInput);
-        int cantidadHashtags = CVSreader.cantHashtag(fechaInput);
+        int cantidadHashtags = Formula1.cantHashtag(fechaInput);
         System.out.println("La cantidad de hashtags distintos para la fecha "+fecha+" es: "+cantidadHashtags);
-
-
-
 
         // Lógica para contar hashtags distintos para una fecha específica
         System.out.println("Opción 3 seleccionada. Fecha: " + fecha);
@@ -165,31 +156,27 @@ public class ProgMain {
         }
 
         LocalDate fecha = LocalDate.parse(fechaInput);
-        System.out.println("El hashtags mas usado para la fecha "+fecha+" es: "+CVSreader.hashMasUsado(fechaInput));
+        System.out.println("El hashtags mas usado para la fecha "+fecha+" es: "+ Formula1.hashMasUsado(fechaInput));
         // Lógica para mostrar el hashtag más usado para una fecha específica
         System.out.println("Opción 4 seleccionada. Fecha: " + fecha);
     }
 
 
-    public static void listarCuentasConMasFavoritos(Scanner scanner) throws QueueVacia {
+    public static void listarCuentasConMasFavoritos(Scanner scanner)  {
         // Lógica para listar cuentas con más favoritos
         System.out.println("Opción 5 seleccionada.");
-        CVSreader.cuentasFavoritas();
+        Formula1.cuentasFavoritas();
     }
 
     public static void contarTweetsConPalabra(Scanner scanner) {
         System.out.print("Ingrese la palabra o frase específica: ");
         scanner.nextLine(); // Consumir el salto de línea anterior
         String palabra = scanner.nextLine();
-        int cantidad= CVSreader.contarDistintos(palabra);
+        int cantidad= Formula1.contarDistintos(palabra);
         System.out.println("La cantidad de tweets con la palabra o frase "+palabra+" es: "+cantidad);
 
 
         // Lógica para contar tweets con una palabra o frase específica
         System.out.println("Opción 6 seleccionada. Palabra o frase: " + palabra);
-    }
-
-    public static void mostrar(Scanner scanner){
-
     }
 }

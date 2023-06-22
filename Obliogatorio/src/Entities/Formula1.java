@@ -1,9 +1,10 @@
-import Entities.*;
+package Entities;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import uy.edu.um.prog2.adt.BinaryHeap.BinaryHeap;
+import uy.edu.um.prog2.adt.BinaryTree.MyTree;
 import uy.edu.um.prog2.adt.BinaryTree.Tree;
 import uy.edu.um.prog2.adt.MyLinkedList.*;
 import uy.edu.um.prog2.adt.queue.*;
@@ -15,7 +16,7 @@ import java.io.IOException;
 import java.io.BufferedReader;
 
 
-public class CVSreader {
+public class Formula1 {
     static MyHash<Integer, Tweet> tweets = new HashImpl(1000000);
     static MyHash hashtag = new HashImpl<>(1000000);
     static MyHash<Long, User> usuarios = new HashImpl<>(2624200);
@@ -124,7 +125,7 @@ public class CVSreader {
 
     }
 
-    //Funcion 1 -  funciona muy lento
+    //Funcion 1
     public static void pilotosMasMencionados(String mes, String anio) throws QueueVacia {
         Tree binaryTreeList = new Tree();
         for (int i = 1; i <canttweets ; i++) {
@@ -149,17 +150,17 @@ public class CVSreader {
 
     }
 
-    //Funcion 2- 5 segundos
+    //Funcion 2
     public static void usuariosConMasTweets()  {
-        Tree binaryTreeList = new Tree();
-        for (int i = 1; i <usuarioslista.size() ; i++) {
+        BinaryHeap heapMax = new BinaryHeap(false);
+        for (int i = 1; i <usuarioslista.size(); i++) {
             User usuario = usuarioslista.get(i);
-            binaryTreeList.insert(usuario.getCantidadTweets(),usuario);
-
+            heapMax.insert(usuario);
         }
-        LinkedList list = binaryTreeList.postorder();
+
         for (int i=0;i<15;i++){
-            User usuariosordenados = (User) list.get(i);
+            User usuariosordenados = (User) heapMax.get();
+            heapMax.delete();
             int cantidad=usuariosordenados.getCantidadTweets();
             String nombre=usuariosordenados.getName();
             String verificado;
@@ -169,10 +170,10 @@ public class CVSreader {
             else{
                 verificado="No";
             }
-            System.out.println("Nombre: "+nombre+" Cantidad de tweets: "+cantidad+" //Verificado: "+verificado);
+            System.out.println("Nombre: "+nombre+" -Cantidad de tweets: "+cantidad+" -Verificado: "+verificado);
         }
     }
-    //Funcion 3 - 10 segundos - hay que bajar el tiempo
+    //Funcion 3
     public static int cantHashtag(String fecha) {
         int contador = 0;
         MyList<String> listahashtag = new LinkedList<>();
@@ -189,7 +190,7 @@ public class CVSreader {
         }
         return contador;
     }
-    //Funcion 4- 14 segundos- hay que bajar el tiempo
+    //Funcion 4
     public static String hashMasUsado(String fecha){
         int contador = 0;
         String hashtag = "";
@@ -210,9 +211,9 @@ public class CVSreader {
         }
         return hashtag+" "+contador;
     }
-    //Funcion 5- lo mismo que la 2
-    public static void cuentasFavoritas() throws QueueVacia {
-        Tree binaryTreeList = new Tree();
+    //Funcion 5
+    public static void cuentasFavoritas()  {
+        MyTree binaryTreeList = new Tree();
         for (int i = 1; i <usuarioslista.size(); i++) {
             User usuario = usuarioslista.get(i);
             int prioridad=usuario.getFavorito();
@@ -229,7 +230,7 @@ public class CVSreader {
         }
     }
 
-    //Funcion 6- 4 segundos- hay que bajarle el tiempo
+    //Funcion 6
     public static int contarDistintos(String palabra) {
         int contador = 0;
         for (int i = 1; i < canttweets; i++) {
