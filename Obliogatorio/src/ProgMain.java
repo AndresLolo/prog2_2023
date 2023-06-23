@@ -11,16 +11,18 @@ public class ProgMain {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int opcion;
-
+        boolean primeravez = true;
         try {
             do {
                 mostrarMenu();
                 System.out.print("Ingrese una opción: ");
                 opcion = scanner.nextInt();
-
                 switch (opcion) {
                     case 0:
-                        Formula1.cargardatos();
+                        if (primeravez) {
+                            Formula1.cargardatos();
+                            primeravez = false;
+                        }
                         break;
                     case 1:
                         try {
