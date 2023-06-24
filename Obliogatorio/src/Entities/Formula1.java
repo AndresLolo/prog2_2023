@@ -94,10 +94,6 @@ public class Formula1 {
 
             }
 
-            System.out.println("Tweets"+tweets.size());
-            System.out.println("Usuarios"+usuarioslista.size());
-            System.out.println("Hashtags"+hashtag.size());
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -110,7 +106,7 @@ public class Formula1 {
                 pilotos.add(piloto);
 
             }
-            System.out.println("Pilotos"+pilotos.size());
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -126,7 +122,7 @@ public class Formula1 {
     }
 
     //Funcion 1
-    public static void pilotosMasMencionados(String mes, String anio) throws QueueVacia {
+    public static void pilotosMasMencionados(String mes, String anio) {
         Tree binaryTreeList = new Tree();
         for (int i = 1; i <canttweets ; i++) {
             if (tweets.get(i).getFecha().contains(mes) && tweets.get(i).getFecha().contains(anio)){

@@ -12,11 +12,14 @@ public class ProgMain {
         Scanner scanner = new Scanner(System.in);
         int opcion;
         boolean primeravez = true;
-        try {
-            do {
-                mostrarMenu();
-                System.out.print("Ingrese una opción: ");
+
+        do {
+            mostrarMenu();
+            System.out.print("Ingrese una opción: ");
+
+            try {
                 opcion = scanner.nextInt();
+
                 switch (opcion) {
                     case 0:
                         if (primeravez) {
@@ -73,15 +76,19 @@ public class ProgMain {
                         System.out.println("Opción inválida. Por favor, ingrese una opción válida.");
                         break;
                 }
-            } while (opcion != 7);
-        } catch (Exception e) {
-            System.out.println("Algun dato ingresado es incorrecto");
+            } catch (Exception e) {
+                System.out.println("Algun dato ingresado es incorrecto");
+                scanner.nextLine(); // Limpiar el búfer de entrada
+                opcion = -1; // Establecer una opción inválida para repetir el bucle
+            }
+        } while (opcion != 7);
 
-        }
+        scanner.close();
     }
 
     public static void mostrarMenu() {
         System.out.println("MENU");
+        System.out.println("Antes de empezar cargue los datos!!");
         System.out.println("0. Cargar datos");
         System.out.println("1. Listar los 10 pilotos activos más mencionados en un mes");
         System.out.println("2. Listar los 15 usuarios con más tweets");
@@ -93,8 +100,7 @@ public class ProgMain {
     }
 
 
-
-    public static void listarPilotosMencionadosEnMes(Scanner scanner) throws QueueVacia {
+    public static void listarPilotosMencionadosEnMes(Scanner scanner)  {
         System.out.print("Ingrese el año (YYYY): ");
         String anioInput = scanner.next();
         System.out.print("Ingrese el mes (MM): ");
@@ -111,6 +117,12 @@ public class ProgMain {
 
         int anio = Integer.parseInt(anioInput);
         int mes = Integer.parseInt(mesInput);
+
+        if (mes < 1 || mes > 12) {
+            System.out.println("Mes inválido. Por favor, ingrese un mes válido (entre 1 y 12).");
+            return;
+        }
+
         Formula1.pilotosMasMencionados(anioInput, mesInput);
 
         // Lógica para listar pilotos mencionados en un mes y año específicos
@@ -118,7 +130,7 @@ public class ProgMain {
     }
 
 
-    public static void listarUsuariosConMasTweets(Scanner scanner) throws QueueVacia {
+    public static void listarUsuariosConMasTweets(Scanner scanner)  {
         // Lógica para listar usuarios con más tweets
         System.out.println("Opción 2 seleccionada.");
         Formula1.usuariosConMasTweets();
