@@ -4,6 +4,7 @@
 ###Precauciones:
 ####Asegurarse de tener Junit instalado o pedira que se lo añada al classpath en el momento de la ejecucion
 ###Descripcion proceso de carga:
+###debido a que el data set es muy pesado y no se puede cargar en memoria, hay que descargarlo en su propia computadora y subirlo a la carpeta data y ahi copiar la ruta relativa del archivo y pegarala en formula 1 en la funcion carga de datos en el csv reader
 ####La carga se hace mediante apache common csv, al cual le pasamos la ruta relativa del archivo el cual se debe analizar, este separa los campos por columnas y los vamos guardando en los distintos TADS
 ####Por ejemplo: Los tweets son guardados en Hashs cuya clave es un numero autogenerado el cual se incrementa automaticamente con cada tweet cargado
 ####Los usuarios son guardados en un hash por medio de la fecha de creacion de su cuenta, no usamos el nombre debido a que hay mas posibilidades de que un usuario se cambie de nombre o que hayan dos usuarios con el mismo nombre a que dos usuarios se creen al mismo tiempo
