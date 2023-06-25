@@ -12,5 +12,5 @@
 ###Consultas:
 ###En la consulta 5 tomamos como que los favoritos es la cantidad de favoritos que tiene el tweet
 ###Info:
-###Las screenshots de los distintos consumos de memoria estan en el ZIP al igual que el diagrama uml
+###Las screenshots de los distintos consumos de memoria estan en el ZIP al igual que el diagrama uml, en el arvhivo que se llama obligatorio 2023.docx es un word
 
